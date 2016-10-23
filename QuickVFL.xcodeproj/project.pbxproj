@@ -1,0 +1,405 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		981466761DA9E0AB0019F2E1 /* QScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 981466751DA9E0AB0019F2E1 /* QScrollViewController.m */; };
+		989CCEE41D990EA30079C88C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCEE31D990EA30079C88C /* main.m */; };
+		989CCEE71D990EA30079C88C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCEE61D990EA30079C88C /* AppDelegate.m */; };
+		989CCEEF1D990EA30079C88C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 989CCEEE1D990EA30079C88C /* Assets.xcassets */; };
+		989CCF001D990FA20079C88C /* UIScrollView+constraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCEFD1D990FA20079C88C /* UIScrollView+constraint.m */; };
+		989CCF011D990FA20079C88C /* UIView+constraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCEFF1D990FA20079C88C /* UIView+constraint.m */; };
+		989CCF051D9910B90079C88C /* QRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF041D9910B90079C88C /* QRootViewController.m */; };
+		989CCF0D1D99115B0079C88C /* UIAlertView+block.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF081D99115B0079C88C /* UIAlertView+block.m */; };
+		989CCF0E1D99115B0079C88C /* UIButton+block.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF0A1D99115B0079C88C /* UIButton+block.m */; };
+		989CCF0F1D99115B0079C88C /* UIView+q.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF0C1D99115B0079C88C /* UIView+q.m */; };
+		989CCF121D99130F0079C88C /* QHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF111D99130F0079C88C /* QHomeViewController.m */; };
+		989CCF151D99168D0079C88C /* QAlignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF141D99168D0079C88C /* QAlignmentViewController.m */; };
+		98D441FC1D9E2BFB00902DE1 /* QTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D441FB1D9E2BFB00902DE1 /* QTableViewController.m */; };
+		98D441FF1D9E2CDA00902DE1 /* QTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D441FE1D9E2CDA00902DE1 /* QTableViewCell.m */; };
+		98D442021D9E36D100902DE1 /* QDemoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D442011D9E36D100902DE1 /* QDemoEntity.m */; };
+		98D442061D9E3C7F00902DE1 /* angry.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D442031D9E3C7F00902DE1 /* angry.png */; };
+		98D442071D9E3C7F00902DE1 /* pirate.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D442041D9E3C7F00902DE1 /* pirate.png */; };
+		98D442081D9E3C7F00902DE1 /* smile.png in Resources */ = {isa = PBXBuildFile; fileRef = 98D442051D9E3C7F00902DE1 /* smile.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		981466741DA9E0AB0019F2E1 /* QScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QScrollViewController.h; sourceTree = "<group>"; };
+		981466751DA9E0AB0019F2E1 /* QScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QScrollViewController.m; sourceTree = "<group>"; };
+		989CCEDF1D990EA30079C88C /* QuickVFL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickVFL.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		989CCEE31D990EA30079C88C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		989CCEE51D990EA30079C88C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		989CCEE61D990EA30079C88C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		989CCEEE1D990EA30079C88C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		989CCEF31D990EA30079C88C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		989CCEFC1D990FA20079C88C /* UIScrollView+constraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+constraint.h"; sourceTree = "<group>"; };
+		989CCEFD1D990FA20079C88C /* UIScrollView+constraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+constraint.m"; sourceTree = "<group>"; };
+		989CCEFE1D990FA20079C88C /* UIView+constraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+constraint.h"; sourceTree = "<group>"; };
+		989CCEFF1D990FA20079C88C /* UIView+constraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+constraint.m"; sourceTree = "<group>"; };
+		989CCF021D99104C0079C88C /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		989CCF031D9910B90079C88C /* QRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRootViewController.h; sourceTree = "<group>"; };
+		989CCF041D9910B90079C88C /* QRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRootViewController.m; sourceTree = "<group>"; };
+		989CCF071D99115B0079C88C /* UIAlertView+block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+block.h"; sourceTree = "<group>"; };
+		989CCF081D99115B0079C88C /* UIAlertView+block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+block.m"; sourceTree = "<group>"; };
+		989CCF091D99115B0079C88C /* UIButton+block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+block.h"; sourceTree = "<group>"; };
+		989CCF0A1D99115B0079C88C /* UIButton+block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+block.m"; sourceTree = "<group>"; };
+		989CCF0B1D99115B0079C88C /* UIView+q.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+q.h"; sourceTree = "<group>"; };
+		989CCF0C1D99115B0079C88C /* UIView+q.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+q.m"; sourceTree = "<group>"; };
+		989CCF101D99130F0079C88C /* QHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QHomeViewController.h; sourceTree = "<group>"; };
+		989CCF111D99130F0079C88C /* QHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHomeViewController.m; sourceTree = "<group>"; };
+		989CCF131D99168D0079C88C /* QAlignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAlignmentViewController.h; sourceTree = "<group>"; };
+		989CCF141D99168D0079C88C /* QAlignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAlignmentViewController.m; sourceTree = "<group>"; };
+		98D441FA1D9E2BFB00902DE1 /* QTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QTableViewController.h; sourceTree = "<group>"; };
+		98D441FB1D9E2BFB00902DE1 /* QTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QTableViewController.m; sourceTree = "<group>"; };
+		98D441FD1D9E2CDA00902DE1 /* QTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QTableViewCell.h; sourceTree = "<group>"; };
+		98D441FE1D9E2CDA00902DE1 /* QTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QTableViewCell.m; sourceTree = "<group>"; };
+		98D442001D9E36D100902DE1 /* QDemoEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QDemoEntity.h; sourceTree = "<group>"; };
+		98D442011D9E36D100902DE1 /* QDemoEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QDemoEntity.m; sourceTree = "<group>"; };
+		98D442031D9E3C7F00902DE1 /* angry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = angry.png; sourceTree = "<group>"; };
+		98D442041D9E3C7F00902DE1 /* pirate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pirate.png; sourceTree = "<group>"; };
+		98D442051D9E3C7F00902DE1 /* smile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		989CCEDC1D990EA30079C88C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		989CCED61D990EA30079C88C = {
+			isa = PBXGroup;
+			children = (
+				989CCEE11D990EA30079C88C /* QuickVFL */,
+				989CCEE01D990EA30079C88C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		989CCEE01D990EA30079C88C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				989CCEDF1D990EA30079C88C /* QuickVFL.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		989CCEE11D990EA30079C88C /* QuickVFL */ = {
+			isa = PBXGroup;
+			children = (
+				989CCEF91D990F1F0079C88C /* src */,
+				989CCEE51D990EA30079C88C /* AppDelegate.h */,
+				989CCEE61D990EA30079C88C /* AppDelegate.m */,
+				989CCEEE1D990EA30079C88C /* Assets.xcassets */,
+				989CCEF31D990EA30079C88C /* Info.plist */,
+				989CCEE21D990EA30079C88C /* Supporting Files */,
+			);
+			path = QuickVFL;
+			sourceTree = "<group>";
+		};
+		989CCEE21D990EA30079C88C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				98D442031D9E3C7F00902DE1 /* angry.png */,
+				98D442041D9E3C7F00902DE1 /* pirate.png */,
+				98D442051D9E3C7F00902DE1 /* smile.png */,
+				989CCEE31D990EA30079C88C /* main.m */,
+				989CCF021D99104C0079C88C /* PrefixHeader.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		989CCEF91D990F1F0079C88C /* src */ = {
+			isa = PBXGroup;
+			children = (
+				989CCEFA1D990F1F0079C88C /* demo */,
+				989CCEFB1D990F1F0079C88C /* lib */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		989CCEFA1D990F1F0079C88C /* demo */ = {
+			isa = PBXGroup;
+			children = (
+				98D441F91D9E2BD700902DE1 /* tableView */,
+				989CCF061D99115B0079C88C /* extensions */,
+				989CCF031D9910B90079C88C /* QRootViewController.h */,
+				989CCF041D9910B90079C88C /* QRootViewController.m */,
+				989CCF101D99130F0079C88C /* QHomeViewController.h */,
+				989CCF111D99130F0079C88C /* QHomeViewController.m */,
+				989CCF131D99168D0079C88C /* QAlignmentViewController.h */,
+				989CCF141D99168D0079C88C /* QAlignmentViewController.m */,
+				981466741DA9E0AB0019F2E1 /* QScrollViewController.h */,
+				981466751DA9E0AB0019F2E1 /* QScrollViewController.m */,
+			);
+			path = demo;
+			sourceTree = "<group>";
+		};
+		989CCEFB1D990F1F0079C88C /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				989CCEFC1D990FA20079C88C /* UIScrollView+constraint.h */,
+				989CCEFD1D990FA20079C88C /* UIScrollView+constraint.m */,
+				989CCEFE1D990FA20079C88C /* UIView+constraint.h */,
+				989CCEFF1D990FA20079C88C /* UIView+constraint.m */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		989CCF061D99115B0079C88C /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				989CCF071D99115B0079C88C /* UIAlertView+block.h */,
+				989CCF081D99115B0079C88C /* UIAlertView+block.m */,
+				989CCF091D99115B0079C88C /* UIButton+block.h */,
+				989CCF0A1D99115B0079C88C /* UIButton+block.m */,
+				989CCF0B1D99115B0079C88C /* UIView+q.h */,
+				989CCF0C1D99115B0079C88C /* UIView+q.m */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
+		98D441F91D9E2BD700902DE1 /* tableView */ = {
+			isa = PBXGroup;
+			children = (
+				98D441FA1D9E2BFB00902DE1 /* QTableViewController.h */,
+				98D441FB1D9E2BFB00902DE1 /* QTableViewController.m */,
+				98D441FD1D9E2CDA00902DE1 /* QTableViewCell.h */,
+				98D441FE1D9E2CDA00902DE1 /* QTableViewCell.m */,
+				98D442001D9E36D100902DE1 /* QDemoEntity.h */,
+				98D442011D9E36D100902DE1 /* QDemoEntity.m */,
+			);
+			path = tableView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		989CCEDE1D990EA30079C88C /* QuickVFL */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 989CCEF61D990EA30079C88C /* Build configuration list for PBXNativeTarget "QuickVFL" */;
+			buildPhases = (
+				989CCEDB1D990EA30079C88C /* Sources */,
+				989CCEDC1D990EA30079C88C /* Frameworks */,
+				989CCEDD1D990EA30079C88C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QuickVFL;
+			productName = QuickVFL;
+			productReference = 989CCEDF1D990EA30079C88C /* QuickVFL.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		989CCED71D990EA30079C88C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = sudi;
+				TargetAttributes = {
+					989CCEDE1D990EA30079C88C = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 989CCEDA1D990EA30079C88C /* Build configuration list for PBXProject "QuickVFL" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 989CCED61D990EA30079C88C;
+			productRefGroup = 989CCEE01D990EA30079C88C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				989CCEDE1D990EA30079C88C /* QuickVFL */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		989CCEDD1D990EA30079C88C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				98D442071D9E3C7F00902DE1 /* pirate.png in Resources */,
+				989CCEEF1D990EA30079C88C /* Assets.xcassets in Resources */,
+				98D442081D9E3C7F00902DE1 /* smile.png in Resources */,
+				98D442061D9E3C7F00902DE1 /* angry.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		989CCEDB1D990EA30079C88C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				989CCEE71D990EA30079C88C /* AppDelegate.m in Sources */,
+				989CCEE41D990EA30079C88C /* main.m in Sources */,
+				989CCF151D99168D0079C88C /* QAlignmentViewController.m in Sources */,
+				98D441FF1D9E2CDA00902DE1 /* QTableViewCell.m in Sources */,
+				989CCF121D99130F0079C88C /* QHomeViewController.m in Sources */,
+				98D442021D9E36D100902DE1 /* QDemoEntity.m in Sources */,
+				989CCF051D9910B90079C88C /* QRootViewController.m in Sources */,
+				981466761DA9E0AB0019F2E1 /* QScrollViewController.m in Sources */,
+				989CCF0F1D99115B0079C88C /* UIView+q.m in Sources */,
+				989CCF001D990FA20079C88C /* UIScrollView+constraint.m in Sources */,
+				989CCF0E1D99115B0079C88C /* UIButton+block.m in Sources */,
+				989CCF011D990FA20079C88C /* UIView+constraint.m in Sources */,
+				98D441FC1D9E2BFB00902DE1 /* QTableViewController.m in Sources */,
+				989CCF0D1D99115B0079C88C /* UIAlertView+block.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		989CCEF41D990EA30079C88C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		989CCEF51D990EA30079C88C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		989CCEF71D990EA30079C88C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = QuickVFL/PrefixHeader.pch;
+				INFOPLIST_FILE = QuickVFL/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.quick.QuickVFL;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		989CCEF81D990EA30079C88C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = QuickVFL/PrefixHeader.pch;
+				INFOPLIST_FILE = QuickVFL/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.quick.QuickVFL;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		989CCEDA1D990EA30079C88C /* Build configuration list for PBXProject "QuickVFL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				989CCEF41D990EA30079C88C /* Debug */,
+				989CCEF51D990EA30079C88C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		989CCEF61D990EA30079C88C /* Build configuration list for PBXNativeTarget "QuickVFL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				989CCEF71D990EA30079C88C /* Debug */,
+				989CCEF81D990EA30079C88C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 989CCED71D990EA30079C88C /* Project object */;
+}
