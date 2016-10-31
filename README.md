@@ -1,2 +1,10 @@
-# QuickVFL
-Quick VFL is a small project based on Apple VFL.
+## Quick简介
+QuickVFL是一个基于苹果VFL的构建视图的小框架。它特别适用于在代码里构建视图。
+
+### 特点
+凡是苹果VFL的特征，QuickVFL一律支持。除此以外，它还有以下的增强点
+- 支持多行描述
+- 支持对齐
+
+## Learn by Example
+你可以直接下载源代码，然后直接在xcode中编译运行。在模拟器中将会看到更加直接的运行效果。
