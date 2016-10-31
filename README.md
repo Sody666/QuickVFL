@@ -42,5 +42,14 @@ NSArray* _arrayNames;
 如果我们能严格遵循这个约定，则我们的VFL代码一眼就能看出变量身份和用途。重申一下
 **VFL的可读性非常非常重要**
 
-批评的声音
+#### 批评的声音
 > 有些同学喜欢缩写，因而labelName喜欢写成lblNam。这是得不偿失的。这也是跟苹果的代码规范相违背的。有兴趣的同学，可以参读一下苹果的代码规范。益处大大的有哦。
+
+#### 更多property的例子
+```objective-c
+@property (nonatomic, weak) UIView* viewWrapper;
+@property (nonatomic, weak) UITextView* textViewNote;
+@property (nonatomic, weak) UILabel* labelEmail;
+@property (nonatomic, weak) UITextField* textFieldPassword;
+@property (nonatomic, strong) NSMutableDictionary* dictionaryParams;
+@property (nonatomic, strong) NSDate* dateRecordDate;
