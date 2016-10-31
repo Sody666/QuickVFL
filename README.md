@@ -27,6 +27,7 @@ VFL对命名其实是没有限制的，只要你遵循oc的变量命名规则就
 我们这样约定property的约定：
 > 控件名＋用途
 > 数据结构名＋用途
+
 比如：
 ```objective-c
 @property (nonatomic, weak) UITableView* tableViewContents;
