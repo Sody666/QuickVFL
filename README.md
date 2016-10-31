@@ -25,8 +25,8 @@ Tips:
 ### property的命名约定
 VFL对命名其实是没有限制的，只要你遵循oc的变量命名规则就可以。但我们做多一些约定，这样我们的VFL代码的可读与维护性都讲大幅提高。
 我们这样约定property的约定：
-控件名＋用途
-数据结构名＋用途
+> 控件名＋用途
+> 数据结构名＋用途
 比如：
 ```objective-c
 @property (nonatomic, weak) UITableView* tableViewContents;
