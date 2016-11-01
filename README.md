@@ -52,3 +52,50 @@ NSArray* _arrayNames;
 @property (nonatomic, weak) UITextField* textFieldPassword;
 @property (nonatomic, strong) NSMutableDictionary* dictionaryParams;
 @property (nonatomic, strong) NSDate* dateRecordDate;
+
+### 左右对齐
+```objective-c
+    UILabel* labelShortLeft = QUICK_SUBVIEW(self.view, UILabel);
+    UILabel* labelLongLeft = QUICK_SUBVIEW(self.view, UILabel);
+    
+    UILabel* labelShortRight = QUICK_SUBVIEW(self.view, UILabel);
+    UILabel* labelLongRight = QUICK_SUBVIEW(self.view, UILabel);
+    
+    UILabel* labelShortCenter = QUICK_SUBVIEW(self.view, UILabel);
+    UILabel* labelLongCenter = QUICK_SUBVIEW(self.view, UILabel);
+    
+    NSString* layoutTree = @"\
+    V:|-10-[labelShortLeft]-10-[labelLongLeft] {left};\
+    H:|-8-[labelShortLeft]-(>=8)-|;\
+    H:[labelLongLeft]-(>=8)-|;\
+    \
+    \
+    V:[labelLongLeft]-10-[labelShortRight]-10-[labelLongRight] {right};\
+    H:|-(>=8)-[labelShortRight]-8-|;\
+    H:|-(>=8)-[labelLongRight];\
+    \
+    \
+    V:[labelLongRight]-10-[labelShortCenter];\
+    V:[labelShortCenter]-10-[labelLongCenter] {centerX};\
+    H:|-(>=8)-[labelShortCenter]-(>=8)-|;\
+    H:|-(>=8)-[labelLongCenter]-(>=8)-|;\
+    ";
+    
+    [self.view q_addConstraintsByText:layoutTree
+                                   involvedViews:NSDictionaryOfVariableBindings(labelLongLeft,
+									labelShortLeft, labelShortCenter, labelLongCenter, 
+									labelLongRight, labelShortRight)];
+    [self.view setNeedsLayout];
+```
+在第一坨VFL语句中，有一个*{left}*，这表示这个语句中的所有控件（superview除外）左对齐。一定要注意的是，**只能在V方向上的语句才能用左右、水平居中对齐**。正是因为做对齐说明了labelShortLeft和labelLongLeft左边的空间关系，所以在labelShortLeft设定了左边跟superView的关系后，labelLongLeft就不用再设置其左边跟superView的关系了。这两个控件在水平描述语句上的(>=8)表示，右边的trail大于等于8.当label文本比较短的时候，label的宽度会缩小。当文本长的时候，宽度会扩大，但最大的时候也只能跟右边有8的距离。
+> 注意：
+> 请确保一个语句的所有内容在分号的左边。\用来控制NSString的内容的。
+
+> 强调：
+> 请不要把VFL语句使用外部的text表示，然后把此内容独立到额外的文件。这样做会打破“相关内容要聚到一起”的规则，会降低代码的可读性和可维护性——VFL里的控件名称跟VC里的ivar名称必须要一致。
+
+第二坨VFL描述了右对齐的两个标签的关系，情形跟第一坨的差不多，所以就不多说了。
+
+第三坨VFL描述了水平居中对齐。这里要重点说明的是，虽然labelShortCenter、labelLongCenter描述了它们的水平居中关系，但你还要单独在H描述上说明它们跟superview的关系，否则当标签的文本很长的时候，文本的内容会失控。
+
+最后两行的代码是设定所有控件的布局并刷新界面。
