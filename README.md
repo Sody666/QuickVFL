@@ -52,6 +52,7 @@ NSArray* _arrayNames;
 @property (nonatomic, weak) UITextField* textFieldPassword;
 @property (nonatomic, strong) NSMutableDictionary* dictionaryParams;
 @property (nonatomic, strong) NSDate* dateRecordDate;
+```
 
 ### 左右对齐
 ```objective-c
