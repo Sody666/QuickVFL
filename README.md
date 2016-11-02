@@ -5,6 +5,73 @@ QuickVFL是一个基于苹果VFL的构建视图的小框架。它特别适用于
 凡是苹果VFL的特征，QuickVFL一律支持。除此以外，它还有以下的增强点
 - 支持多行描述
 - 支持对齐
+- 支持设置比例约束
+
+## 技术要点及常用API说明
+### 控件定位
+我们会想传统的frame，它包括origin和size。同样，一个控件要能准确的被布局出来，它必须要有正确的坐标和大小。这里的正确的含义是，不含糊的，不冲突的。
+举例而言，一个控件如果只描述了x值，没有y值，则是含糊的。或者没有描述大小，则其也是含糊的。含糊的时候，系统会用默认的方式布局。比如，如果你没有描述y的值，则系统可能会把它设置为0.
+一个控件，对于一个属性（x、y、大小等），如果有多个描述，并且这些描述的优先级是一样的，则系统会认为描述冲突了，它就会自己武断地删除掉一些，直到冲突消失为止。这个时候，xcode的log就会打印大段大段的警告信息。
+当你没有准确地描述一个控件的frame信息的时候，你就把你的程序置于一个不可控的状态。这是不可取的。
+> 所以我们在写写VFL的时候，要不上眼睛，好好想想一个控件它是否已经被准确地描述了。你可以直接描述它，也可以使用对齐等方式间接描述。总而言之，它务必处于一个确定的状态中。
+
+#### 一些不能准确描述控件的VFL的例子
+```objective-c
+# labelName, labelEmail are wrap by viewWrapper
+# labelName = QUICK_SUBVIEW(viewWrapper, UILabel);
+# labelEmail = QUICK_SUBVIEW(viewWrapper, UILabel);
+
+////////////////////
+V:|-[labelName]-[labelEmail]-|;
+H:|-[labelName]; # tail undetermined
+H:[labelEmail]-|;# lead undetermined
+
+////////////////////
+V:|-[labelName]-[labelEmail]-| {left, right};
+H:|-[labelName]-|;
+H:|-[labelEmail]-|; # conflict. should be removed.
+```
+
+### 对齐
+QuickVFL支持在语句里设置对齐。格式是：
+```objective-c
+VorH:|-[widget]-| {left, right, top, bottom, centerX, centerY};
+```
+也就是，在语句结束符号，分号之前，用大括号包扩对齐方式。
+但一定要注意，
+在V方向的时候，你只能限定*left、right、centerX*
+在H方向的时候，你只能限定*top、bottom、centerY*
+其实这个限制很好理解，因为你在相应方向上你做这些限定才有意义。
+> 逆向思维：如果你在H方向上，限定多个控件左对齐，你觉得有意义吗？
+
+请重点注意，如果你在设置centerX、centerY的时候，最好只包扩相关的控件，无关的控件要分开第二个语句描述，否则会出现没法对齐的情况。
+```objective-c
+#labelName
+#    |
+#labelEmail
+#    |
+#imageNotice
+#
+#These 3 widgets vertical relationship. But labels are center X.
+
+#Bad way:
+V:[labelName]-[labelEmail]-[imageNotice] {centerX};
+
+#Good way:
+V:[labelName]-[labelEmail] {centerX};
+V:[labelEmail]-[imageNotice];
+```
+### 快速添加控件
+```objective-c
+QUICK_SUBVIEW(superView, targetWidgetName);
+```
+初始化控件，并把它添加到父试图内。第一个参数是目标控件的super view，第二个参数是控件的类名字。这个宏会返回准备好的控件。
+
+例子：
+```objective-c
+UIScrollView* scrollViewVertical = QUICK_SUBVIEW(self.view, UIScrollView);
+UILabel* labelName = QUICK_SUBVIEW(self.view, UILabel);
+```
 
 ## Learn by Example
 你可以直接下载源代码，然后直接在xcode中编译运行。在模拟器中将会看到更加直接的运行效果。
