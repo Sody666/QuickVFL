@@ -100,3 +100,5 @@ NSArray* _arrayNames;
 第三坨VFL描述了水平居中对齐。这里要重点说明的是，虽然labelShortCenter、labelLongCenter描述了它们的水平居中关系，但你还要单独在H描述上说明它们跟superview的关系，否则当标签的文本很长的时候，文本的内容会失控。
 
 最后两行的代码是设定所有控件的布局并刷新界面。
+最后，运行的效果如下：
+[![对齐运行效果](https://github.com/Sody666/QuickVFL/blob/master/readMeResources/align1.png "对齐运行效果")](https://github.com/Sody666/QuickVFL/blob/master/readMeResources/align1.png "对齐运行效果")
