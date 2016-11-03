@@ -1,19 +1,62 @@
 ## Quick简介
 QuickVFL是一个基于苹果VFL的构建视图的小框架。它特别适用于在代码里构建视图。
-
 ### 特点
 凡是苹果VFL的特征，QuickVFL一律支持。除此以外，它还有以下的增强点
 - 支持多行描述
 - 支持对齐
 - 支持设置比例约束
 
+### 谁会需要QuickVFL
+总而言之，是不能用xib或者不喜欢用xib的人。会有以下情形：
+1. app太大，xib是其中的因素
+2. 多人合作的时候，经常造成xib冲突
+3. 一个人多个版本同时进行，经常造成xib冲突
+4. 控制欲太强的人
+5. 想要跟别人方便交流布局经验的人
+
+第一条就不用解释了
+第二第三条，如果你经历过，肯定也不用说了。xib冲突起来，貌似出了重新写，没啥好办法。
+第四条，在你比较过xib中约束的可读性、可修改性后，估计抓狂的你会很有心得。
+第五条。你如果用文字去快速、直观地表述你的布局，然后在stackoverflow上讨教？除了截屏，没办法。
+我会在文章的后面不断地添加使用技巧，使读者慢慢爱上QuickVFL。
+### QuickVFL的短处
+- 上手时间比较长，尤其当你之前没用过VFL的时候
+- 使用的效果严重依赖于经验
+- 跟VFL一样，出错了，不容易定位
+
+但用QuickVFL跟玩魔法一样，当你看到一个一个个灵活的、鲁棒性很强的界面被你构建出来的时候，成就感很强。
+OK，如果你觉得以上的好和坏你都可以接受，我们就动身吧。
+
 ## 技术要点及常用API说明
 ### 控件定位
-我们会想传统的frame，它包括origin和size。同样，一个控件要能准确的被布局出来，它必须要有正确的坐标和大小。这里的正确的含义是，不含糊的，不冲突的。
-举例而言，一个控件如果只描述了x值，没有y值，则是含糊的。或者没有描述大小，则其也是含糊的。含糊的时候，系统会用默认的方式布局。比如，如果你没有描述y的值，则系统可能会把它设置为0.
-一个控件，对于一个属性（x、y、大小等），如果有多个描述，并且这些描述的优先级是一样的，则系统会认为描述冲突了，它就会自己武断地删除掉一些，直到冲突消失为止。这个时候，xcode的log就会打印大段大段的警告信息。
-当你没有准确地描述一个控件的frame信息的时候，你就把你的程序置于一个不可控的状态。这是不可取的。
-> 所以我们在写写VFL的时候，要不上眼睛，好好想想一个控件它是否已经被准确地描述了。你可以直接描述它，也可以使用对齐等方式间接描述。总而言之，它务必处于一个确定的状态中。
+我们回想传统的frame，它包括origin和size。同样，一个控件要能准确的被布局出来，它必须要有正确的坐标和大小。这里的正确的含义是，不含糊的，不冲突的。不过，当你使用约束的时候，你要转变一下观念。你不要老想着它在哪里，有多大多大，而是想着，它**相对谁，边界关系如何**这里，被相对的这个谁，你要假定它是已经确定的。
+我们来看一段代码：
+```objective-c
+    UIView* viewDividerTop = QUICK_SUBVIEW(self, UIView);
+    // 底部的分割线是需要的。因为键盘起来的时候，没有分割线很难看
+    UIView* viewDividerBottom = QUICK_SUBVIEW(self, UIView);
+    UIView* viewDividerVertical = QUICK_SUBVIEW(self, UIView);
+    
+    self.buttonUnionLogin = QUICK_SUBVIEW(self, UIButton);
+    self.buttonOtherLoginType = QUICK_SUBVIEW(self, UIButton);
+    
+    NSString* layoutTree = @"\
+    V:|[viewDividerTop(0.5)][_buttonUnionLogin][viewDividerBottom(0.5)]| {left};\
+    V:[viewDividerTop][_buttonOtherLoginType][viewDividerBottom] {right};\
+    H:|[_buttonUnionLogin][viewDividerVertical(0.5)][_buttonOtherLoginType(_buttonUnionLogin)]| {top, bottom};\
+    ";
+    
+    [self q_addConstraintsByText:layoutTree
+                    involvedViews:NSDictionaryOfVariableBindings(viewDividerTop, viewDividerBottom, viewDividerVertical, _buttonUnionLogin, _buttonOtherLoginType)];
+```
+这是两个并列等宽的按钮的控件的构建过程。按钮的上下都有一条边线，中间也有一条分割线。我们来看看它们是如何使用相对性描述位置的。
+V的第一行，三个控件竖直摞着，然后它们想都某控件左对齐。相对谁？可以假想为它们中的任意一个。
+V的第二行，还是三个控件摞着。但注意了，最顶上和最底下是没有superview的。因为第一行已经描述过这个关系了。你在描述一次，可能会冲突。这里相对某控件右对齐。
+妈蛋，到现在为止，都还没说清楚想对谁啊！
+我们再来看第三行。*H:|[_buttonUnionLogin]*讲了左边的按钮的左边关系。左对齐的那个谁出现了。同样，*[_buttonOtherLoginType(_buttonUnionLogin)]|*讲了右边的按钮的右边关系，右对齐的那个谁出现了。这样，所有控件的左右边界都描述清楚了。其实，第一行也讲清楚了所有控件的上下边界。这样，四个边界都清晰啦，所以位置大致出来了。
+我们在细看一下H的那一行，它讲述了两个按钮的宽是相等的，然后两个按钮中间夹着个竖线。这样，非常巧妙地把整个控件都定下来了:
+![控件效果图](https://github.com/Sody666/QuickVFL/blob/master/readMeResources/bottom.png "控件效果图")
+
 
 #### 一些不能准确描述控件的VFL的例子
 ```objective-c
