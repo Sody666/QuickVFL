@@ -104,6 +104,21 @@ QUICK_SUBVIEW(superView, targetWidgetName);
 UIScrollView* scrollViewVertical = QUICK_SUBVIEW(self.view, UIScrollView);
 UILabel* labelName = QUICK_SUBVIEW(self.view, UILabel);
 ```
+### 给控件添加约束
+```objective-c
+/**
+ *  add autolayout constraint to me.
+ *
+ *  @param text  VFL text
+ *  @param views views involed
+ *
+ *  @return added constraints
+ */
+-(NSArray*) q_addConstraintsByText:(NSString*)text
+                  involvedViews:(NSDictionary*)views;
+```
+就是写好了整坨VFL后，直接把它加到最大的superview上。一般情况下，调用者就是VFL中描述的所有的控件的共同的父视图。最大的父视图的父视图也没关系。此视图包含了所有的视图就可以了。involvedViews我们一般跟*NSDictionaryOfVariableBindings *配合使用。如果你不知道这是啥东东，最好马上到狗爹上搜一下。
+> 有了以上两个api后，其实你就可以架锅烧饭了。每次无非就是添加视图，然后用文本描述它，然后把约束添加到父视图上。
 
 ## Learn by Example
 你可以直接下载源代码，然后直接在xcode中编译运行。在模拟器中将会看到更加直接的运行效果。
