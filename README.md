@@ -51,29 +51,15 @@ OK，如果你觉得以上的好和坏你都可以接受，我们就动身吧。
 ```
 这是两个并列等宽的按钮的控件的构建过程。按钮的上下都有一条边线，中间也有一条分割线。我们来看看它们是如何使用相对性描述位置的。
 V的第一行，三个控件竖直摞着，然后它们想都某控件左对齐。相对谁？可以假想为它们中的任意一个。
+
 V的第二行，还是三个控件摞着。但注意了，最顶上和最底下是没有superview的。因为第一行已经描述过这个关系了。你在描述一次，可能会冲突。这里相对某控件右对齐。
+
 妈蛋，到现在为止，都还没说清楚想对谁啊！
+
 我们再来看第三行。*H:|[_buttonUnionLogin]*讲了左边的按钮的左边关系。左对齐的那个谁出现了。同样，*[_buttonOtherLoginType(_buttonUnionLogin)]|*讲了右边的按钮的右边关系，右对齐的那个谁出现了。这样，所有控件的左右边界都描述清楚了。其实，第一行也讲清楚了所有控件的上下边界。这样，四个边界都清晰啦，所以位置大致出来了。
 我们在细看一下H的那一行，它讲述了两个按钮的宽是相等的，然后两个按钮中间夹着个竖线。这样，非常巧妙地把整个控件都定下来了:
+
 ![控件效果图](https://github.com/Sody666/QuickVFL/blob/master/readMeResources/bottom.png "控件效果图")
-
-
-#### 一些不能准确描述控件的VFL的例子
-```objective-c
-# labelName, labelEmail are wrap by viewWrapper
-# labelName = QUICK_SUBVIEW(viewWrapper, UILabel);
-# labelEmail = QUICK_SUBVIEW(viewWrapper, UILabel);
-
-////////////////////
-V:|-[labelName]-[labelEmail]-|;
-H:|-[labelName]; # tail undetermined
-H:[labelEmail]-|;# lead undetermined
-
-////////////////////
-V:|-[labelName]-[labelEmail]-| {left, right};
-H:|-[labelName]-|;
-H:|-[labelEmail]-|; # conflict. should be removed.
-```
 
 ### 对齐
 QuickVFL支持在语句里设置对齐。格式是：
@@ -95,7 +81,7 @@ VorH:|-[widget]-| {left, right, top, bottom, centerX, centerY};
 #    |
 #imageNotice
 #
-#These 3 widgets vertical relationship. But labels are center X.
+#These 3 widgets vertical relationship. But labels will　be center X.
 
 #Bad way:
 V:[labelName]-[labelEmail]-[imageNotice] {centerX};
