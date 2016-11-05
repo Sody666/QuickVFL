@@ -1,5 +1,6 @@
 ## Quick简介
 QuickVFL是一个基于苹果VFL的构建视图的小框架。它特别适用于在代码里构建视图。
+
 ### 特点
 凡是苹果VFL的特征，QuickVFL一律支持。除此以外，它还有以下的增强点
 - 支持多行描述
@@ -19,6 +20,7 @@ QuickVFL是一个基于苹果VFL的构建视图的小框架。它特别适用于
 第四条，在你比较过xib中约束的可读性、可修改性后，估计抓狂的你会很有心得。
 第五条。你如果用文字去快速、直观地表述你的布局，然后在stackoverflow上讨教？除了截屏，没办法。
 我会在文章的后面不断地添加使用技巧，使读者慢慢爱上QuickVFL。
+
 ### QuickVFL的短处
 - 上手时间比较长，尤其当你之前没用过VFL的时候
 - 使用的效果严重依赖于经验
@@ -29,38 +31,26 @@ OK，如果你觉得以上的好和坏你都可以接受，我们就动身吧。
 
 ## 技术要点
 ### 控件定位
-我们回想传统的frame，它包括origin和size。同样，一个控件要能准确的被布局出来，它必须要有正确的坐标和大小。这里的正确的含义是，不含糊的，不冲突的。不过，当你使用约束的时候，你要转变一下观念。你不要老想着它在哪里，有多大多大，而是想着，它**相对谁，边界关系如何**这里，被相对的这个谁，你要假定它是已经确定的。
-我们来看一段代码：
+我们回想传统的frame，它包括origin和size。同样，一个控件要能准确的被布局出来，它必须要有正确的坐标和大小。这里的正确的含义是，不含糊的，不冲突的。不过，当你使用约束的时候，你要转变一下观念。你不要老想着它在哪里，有多大多大，而是想着，它**相对谁，边界关系如何**，这里，被相对的这个谁，你要假定它是已经确定的。
+其实，定位控件基本上就是VFL的全部工作。你可以写得很艺术，也可以写得很笨拙。有如以下的代码：
 ```objective-c
-    UIView* viewDividerTop = QUICK_SUBVIEW(self, UIView);
-    // 底部的分割线是需要的。因为键盘起来的时候，没有分割线很难看
-    UIView* viewDividerBottom = QUICK_SUBVIEW(self, UIView);
-    UIView* viewDividerVertical = QUICK_SUBVIEW(self, UIView);
-    
-    self.buttonUnionLogin = QUICK_SUBVIEW(self, UIButton);
-    self.buttonOtherLoginType = QUICK_SUBVIEW(self, UIButton);
-    
-    NSString* layoutTree = @"\
-    V:|[viewDividerTop(0.5)][_buttonUnionLogin][viewDividerBottom(0.5)]| {left};\
-    V:[viewDividerTop][_buttonOtherLoginType][viewDividerBottom] {right};\
-    H:|[_buttonUnionLogin][viewDividerVertical(0.5)][_buttonOtherLoginType(_buttonUnionLogin)]| {top, bottom};\
-    ";
-    
-    [self q_addConstraintsByText:layoutTree
-                    involvedViews:NSDictionaryOfVariableBindings(viewDividerTop, viewDividerBottom, viewDividerVertical, _buttonUnionLogin, _buttonOtherLoginType)];
+UIView* viewWrapper = QUICK_SUBVIEW(self.view, UIView);
+UIButton* buttonLeft = QUICK_SUBVIEW(viewWrapper, UIButton);
+UIButton* buttonRight = QUICK_SUBVIEW(viewWrapper, UIButton);
+UIView* viewDivider = QUICK_SUBVIEW(viewWrapper, UIView);
+
+NSString* goodWay = @"\
+	H:|[buttonLeft][buttonRight][viewDivider(0.5)]| {top, bottom};\
+	V:|[buttonLeft]|;";
+
+NSString* verbalWay = @"\
+	H:|[buttonLeft][buttonRight][viewDivider(0.5)]|;\
+	V:|[buttonLeft]|;\
+	V:|[buttonRight]|;\
+	V:|[viewDivider]|;";
 ```
-这是两个并列等宽的按钮的控件的构建过程。按钮的上下都有一条边线，中间也有一条分割线。我们来看看它们是如何使用相对性描述位置的。
-V的第一行，三个控件竖直摞着，然后它们想都某控件左对齐。相对谁？可以假想为它们中的任意一个。
-
-V的第二行，还是三个控件摞着。但注意了，最顶上和最底下是没有superview的。因为第一行已经描述过这个关系了。你在描述一次，可能会冲突。这里相对某控件右对齐。
-
-妈蛋，到现在为止，都还没说清楚想对谁啊！
-
-我们再来看第三行。*H:|[_buttonUnionLogin]*讲了左边的按钮的左边关系。左对齐的那个谁出现了。同样，*[_buttonOtherLoginType(_buttonUnionLogin)]|*讲了右边的按钮的右边关系，右对齐的那个谁出现了。这样，所有控件的左右边界都描述清楚了。其实，第一行也讲清楚了所有控件的上下边界。这样，四个边界都清晰啦，所以位置大致出来了。
-我们在细看一下H的那一行，它讲述了两个按钮的宽是相等的，然后两个按钮中间夹着个竖线。这样，非常巧妙地把整个控件都定下来了:
-
-![控件效果图](https://github.com/Sody666/QuickVFL/blob/master/readMeResources/bottom.png "控件效果图")
-
+如果你才刚刚开始用VFL，可以用笨拙的平铺直叙的方式去写。等你慢慢有经验了，就可以写得有技巧一点。
+在写的时候，第一思想一定不要是某某控件是多大多大，而是要把设备想象成不定宽高，控件是相对什么什么应该怎样怎样。
 ### 对齐
 QuickVFL支持在语句里设置对齐。格式是：
 ```objective-c
@@ -120,6 +110,74 @@ UILabel* labelName = QUICK_SUBVIEW(self.view, UILabel);
 就是写好了整坨VFL后，直接把它加到最大的superview上。一般情况下，调用者就是VFL中描述的所有的控件的共同的父视图。最大的父视图的父视图也没关系。此视图包含了所有的视图就可以了。involvedViews我们一般跟*NSDictionaryOfVariableBindings *配合使用。如果你不知道这是啥东东，最好马上到狗爹上搜一下。
 > 有了以上两个api后，其实你就可以架锅烧饭了。每次无非就是添加视图，然后用文本描述它，然后把约束添加到父视图上。
 
+### 设置控件调整空间的优先级
+```objective-c
+/**
+ *  Stay shaped when there is less space than needed.
+ *
+ *  @param priority     priority to stay original shape
+ *  @param isHorizontal is for horizontal orientation
+ */
+-(void)q_stayShapedWhenCompressedWithPriority:(UILayoutPriority)priority
+                                  isHorizontal:(BOOL)isHorizontal;
+
+/**
+ *  Stay shaped when there are more space than needed.
+ *
+ *  @param priority     priority to stay original shape
+ *  @param isHorizontal is for horizontal orientation
+ */
+-(void)q_stayShapedWhenStretchedWithPriority:(UILayoutPriority)priority
+                                 isHorizontal:(BOOL)isHorizontal;
+```
+当同一维度放置了多个控件时，有可能会发生如下问题：当此维度上的空间多余/不足时，该拉伸/挤压谁？苹果有直接的api解决这问题的。但其非常拗口难记。所以我们写了一个包装一下。用途就是，当空间发生变化时，控件保持现状的优先级。优先级越高，保持现状的能力越高。优先级越低，空间发生变化时，第一时间要修改此控件。因为所有控件默认的优先级都是“高优先级”，所以你作为修改，降低目标控件的优先级就可以了。
+如下的例子代码就是一个聊天记录里的右侧情形：
+```objective-c
+UIView* viewWrapper = QUICK_SUBVIEW(self.view, UIView);
+UILabel* labelChatContent = QUICK_SUBVIEW(viewWrapper, UILabel);
+UIImageView* imageViewAvatar = QUICK_SUBVIEW(viewWrapper, UIImageView);
+
+NSString* layoutTree = @"H:|-(>=15)-[labelChatContent]-[imageViewAvatar]-15-| {top};\
+						 V:|-5-[imageViewAvatar]-(>=5)-|;\
+						 V:[labelChatContent]-(>=5)-|";
+
+[viewWrapper q_addConstraintsByText:layoutTree
+                        involvedViews:NSDictionaryOfVariableBindings(labelChatContent, imageViewAvatar)];
+
+[labelChatContent q_stayShapedWhenStretchedWithPriority:UILayoutPriorityDefaultLow isHorizontal:YES];
+[labelChatContent q_stayShapedWhenCompressedWithPriority:UILayoutPriorityDefaultLow isHorizontal:YES];
+```
+
+如果没有最底下的那两行，头像可能会被挤到屏幕外面。
+当然，不要忘了把label的行数设置为0.
+
+### 设置控件不同维度的比例关系
+```objective-c
+/**
+ *  Set send's width equal to another view's attribute
+ *
+ *  @param aView      target view
+ *  @param attribute  equal attribution
+ *  @param multiplier multiplier value
+ */
+-(void)q_equalWidthToView:(UIView*)aView
+       forLayoutAttribute:(NSLayoutAttribute)attribute
+               multiplier:(CGFloat)multiplier;
+
+/**
+ *  Set send's height equal to another view's attribute
+ *
+ *  @param aView      target view
+ *  @param attribute  equal attribution
+ *  @param multiplier multiplier value
+ */
+-(void)q_equalHeightToView:(UIView*)aView
+        forLayoutAttribute:(NSLayoutAttribute)attribute
+                multiplier:(CGFloat)multiplier;
+```
+**attribute只应该使用长或宽**，因为api已经明说了是设置控件的宽高的。这个api和VFL结合着使用，实现不同维度的比例约束。比如：
+- 自身宽高比例
+- 自身宽高和非sibling的控件的比例关系
 ## Learn by Example
 你可以直接下载源代码，然后直接在xcode中编译运行。在模拟器中将会看到更加直接的运行效果。
 QuickVFL的主要文件是
