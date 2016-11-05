@@ -178,6 +178,63 @@ NSString* layoutTree = @"H:|-(>=15)-[labelChatContent]-[imageViewAvatar]-15-| {t
 **attribute只应该使用长或宽**，因为api已经明说了是设置控件的宽高的。这个api和VFL结合着使用，实现不同维度的比例约束。比如：
 - 自身宽高比例
 - 自身宽高和非sibling的控件的比例关系
+
+### 使用ScrollView
+基本所有的VC都必须要使用scrollView或者UITableView，以防止屏幕不够高的问题。如果你还没有意识到这是一个大问题的话，我只能悄悄拍拍你肩膀并提示，兄弟，别说话了，趁老板没发现这问题，赶紧去修改代码，支持这个功能。
+我们的小框架非常方便地支持此功能的。
+```objective-c
+// #import "UIScrollView+constraint.h"
+
+/**
+ *  prepare the scroll view content as same size to scroll view
+ *
+ *  @return the content view prepared.
+ */
+-(UIView*)q_prepareAutolayoutContentView;
+
+/**
+ *  Refresh the content view with updated height.
+ *  Note: Used for vertically scroll.
+ *  Should be used when widgets is dynamically added to
+ *  content view and the height is undetermined(i.e. the
+ *  widget at the bottom is not stick to bottom of content view)
+ *
+ *  @param height current updated height
+ */
+-(void)q_refreshContentViewWithHeight:(CGFloat)height;
+
+/**
+ *  Refresh the content view.
+ *  Note: Used for vertically scroll.
+ *  Should be used when the content view height is determined.
+ */
+-(void)q_refreshContentViewHeight;
+
+/**
+ *  Refresh the content view with updated width
+ *  Note: Used for horizontally scroll.
+ *  Should be used when widgets is dynamically added to content 
+ *  view and the width is undetermined.
+ *
+ *  @param width current updated width
+ */
+-(void)q_refreshContentViewWithWidth:(CGFloat)width;
+
+/**
+ *  Refresh the content view.
+ *  Note: Used for horizontally scroll.
+ *  Should be used when the content view width is determined.
+ */
+-(void)q_refreshContentViewWidth;
+```
+第一个API就是让你的scrollView准备好一切，然后它会返回一个UIView给你使用。这个返回的View就是contentView，你可以随意往里面写东西。
+一般情况下，我们的UIScrollView是覆盖整个VC的。
+你往contentView里构建完了layout，最后要做的工作就是刷新scrollView。是垂直还是水平，根据需要调用刷新api即可。但在这里又一个细节你是需要清楚的：
+如果你的contentView最底下的视图的bottom跟contentView的bottom是“粘合”起来了的，你只要调用不用提供高度的那个api就可以。如果没有粘合（此种情形最有可能是你后续需要动态地增加更多控件），你需要把contentView的高度告诉api，然后框架会提你做刷新。
+刷新的结果是，如果你的contentView没有scrollView高/宽，则滚动会被禁用，否则contentView会自动拉到适当的大小，然后帮你把滚动启动过来。
+你可以看Demo中的ScrollView部分。里面的简单例子够你学习的。
+> 近来在想，貌似ContentView中如果有输入控件，弹键盘的时候是否应该做一些东东？是个问题，看什么时候加上这个功能。
+
 ## Learn by Example
 你可以直接下载源代码，然后直接在xcode中编译运行。在模拟器中将会看到更加直接的运行效果。
 QuickVFL的主要文件是
