@@ -7,31 +7,50 @@ QuickVFL是一个基于苹果VFL的构建视图的小框架。它特别适用于
 - 支持对齐
 - 支持设置比例约束
 
-## 技术要点及常用API说明
+### 谁会需要QuickVFL
+总而言之，是不能用xib或者不喜欢用xib的人。会有以下情形：
+- app太大，xib是其中的因素
+- 多人合作的时候，经常造成xib冲突
+- 一个人多个版本同时进行，经常造成xib冲突
+- 控制欲太强的人
+- 想要跟别人方便交流布局经验的人
+
+第一条就不用解释了
+第二第三条，如果你经历过，肯定也不用说了。xib冲突起来，貌似出了重新写，没啥好办法。
+第四条，在你比较过xib中约束的可读性、可修改性后，估计抓狂的你会很有心得。
+第五条。你如果用文字去快速、直观地表述你的布局，然后在stackoverflow上讨教？除了截屏，没办法。
+我会在文章的后面不断地添加使用技巧，使读者慢慢爱上QuickVFL。
+
+### QuickVFL的短处
+- 上手时间比较长，尤其当你之前没用过VFL的时候
+- 使用的效果严重依赖于经验
+- 跟VFL一样，出错了，不容易定位
+
+但用QuickVFL跟玩魔法一样，当你看到一个一个个灵活的、鲁棒性很强的界面被你构建出来的时候，成就感很强。
+OK，如果你觉得以上的好和坏你都可以接受，我们就动身吧。
+
+## 技术要点
 ### 控件定位
-我们会想传统的frame，它包括origin和size。同样，一个控件要能准确的被布局出来，它必须要有正确的坐标和大小。这里的正确的含义是，不含糊的，不冲突的。
-举例而言，一个控件如果只描述了x值，没有y值，则是含糊的。或者没有描述大小，则其也是含糊的。含糊的时候，系统会用默认的方式布局。比如，如果你没有描述y的值，则系统可能会把它设置为0.
-一个控件，对于一个属性（x、y、大小等），如果有多个描述，并且这些描述的优先级是一样的，则系统会认为描述冲突了，它就会自己武断地删除掉一些，直到冲突消失为止。这个时候，xcode的log就会打印大段大段的警告信息。
-当你没有准确地描述一个控件的frame信息的时候，你就把你的程序置于一个不可控的状态。这是不可取的。
-> 所以我们在写写VFL的时候，要不上眼睛，好好想想一个控件它是否已经被准确地描述了。你可以直接描述它，也可以使用对齐等方式间接描述。总而言之，它务必处于一个确定的状态中。
-
-#### 一些不能准确描述控件的VFL的例子
+我们回想传统的frame，它包括origin和size。同样，一个控件要能准确的被布局出来，它必须要有正确的坐标和大小。这里的正确的含义是，不含糊的，不冲突的。不过，当你使用约束的时候，你要转变一下观念。你不要老想着它在哪里，有多大多大，而是想着，它**相对谁，边界关系如何**，这里，被相对的这个谁，你要假定它是已经确定的。
+其实，定位控件基本上就是VFL的全部工作。你可以写得很艺术，也可以写得很笨拙。有如以下的代码：
 ```objective-c
-# labelName, labelEmail are wrap by viewWrapper
-# labelName = QUICK_SUBVIEW(viewWrapper, UILabel);
-# labelEmail = QUICK_SUBVIEW(viewWrapper, UILabel);
+UIView* viewWrapper = QUICK_SUBVIEW(self.view, UIView);
+UIButton* buttonLeft = QUICK_SUBVIEW(viewWrapper, UIButton);
+UIButton* buttonRight = QUICK_SUBVIEW(viewWrapper, UIButton);
+UIView* viewDivider = QUICK_SUBVIEW(viewWrapper, UIView);
 
-////////////////////
-V:|-[labelName]-[labelEmail]-|;
-H:|-[labelName]; # tail undetermined
-H:[labelEmail]-|;# lead undetermined
+NSString* goodWay = @"\
+	H:|[buttonLeft][buttonRight][viewDivider(0.5)]| {top, bottom};\
+	V:|[buttonLeft]|;";
 
-////////////////////
-V:|-[labelName]-[labelEmail]-| {left, right};
-H:|-[labelName]-|;
-H:|-[labelEmail]-|; # conflict. should be removed.
+NSString* verbalWay = @"\
+	H:|[buttonLeft][buttonRight][viewDivider(0.5)]|;\
+	V:|[buttonLeft]|;\
+	V:|[buttonRight]|;\
+	V:|[viewDivider]|;";
 ```
-
+如果你才刚刚开始用VFL，可以用笨拙的平铺直叙的方式去写。等你慢慢有经验了，就可以写得有技巧一点。
+在写的时候，第一思想一定不要是某某控件是多大多大，而是要把设备想象成不定宽高，控件是相对什么什么应该怎样怎样。
 ### 对齐
 QuickVFL支持在语句里设置对齐。格式是：
 ```objective-c
@@ -52,7 +71,7 @@ VorH:|-[widget]-| {left, right, top, bottom, centerX, centerY};
 #    |
 #imageNotice
 #
-#These 3 widgets vertical relationship. But labels are center X.
+#These 3 widgets vertical relationship. But labels will　be center X.
 
 #Bad way:
 V:[labelName]-[labelEmail]-[imageNotice] {centerX};
@@ -61,6 +80,9 @@ V:[labelName]-[labelEmail]-[imageNotice] {centerX};
 V:[labelName]-[labelEmail] {centerX};
 V:[labelEmail]-[imageNotice];
 ```
+### 空间抢占
+当你在同一个水平线上放置两个以上的控件时，如果它们的宽度会运行时改变，你就必须指定它们变化时的抢占优先级。iOS里有两个维度说明这件事：空间不足时和空间有多时的优先级。其实苹果描述两个维度的api非常拗口，非常难记住。所以我们会稍后一点地章节提供了一个直观一点的api。其实这个空间抢占问题，也是控件的相对性的确定性的问题。几个控件，你中有我，我中有你，所有钱都放一个口袋。当空间有多余，或者空间不足，要挤压或拉伸时，就会出乱子。你的成效就处于一个不可控的状态中。
+## 常用API说明
 ### 快速添加控件
 ```objective-c
 QUICK_SUBVIEW(superView, targetWidgetName);
@@ -72,6 +94,146 @@ QUICK_SUBVIEW(superView, targetWidgetName);
 UIScrollView* scrollViewVertical = QUICK_SUBVIEW(self.view, UIScrollView);
 UILabel* labelName = QUICK_SUBVIEW(self.view, UILabel);
 ```
+### 给控件添加约束
+```objective-c
+/**
+ *  add autolayout constraint to me.
+ *
+ *  @param text  VFL text
+ *  @param views views involed
+ *
+ *  @return added constraints
+ */
+-(NSArray*) q_addConstraintsByText:(NSString*)text
+                  involvedViews:(NSDictionary*)views;
+```
+就是写好了整坨VFL后，直接把它加到最大的superview上。一般情况下，调用者就是VFL中描述的所有的控件的共同的父视图。最大的父视图的父视图也没关系。此视图包含了所有的视图就可以了。involvedViews我们一般跟*NSDictionaryOfVariableBindings *配合使用。如果你不知道这是啥东东，最好马上到狗爹上搜一下。
+> 有了以上两个api后，其实你就可以架锅烧饭了。每次无非就是添加视图，然后用文本描述它，然后把约束添加到父视图上。
+
+### 设置控件调整空间的优先级
+```objective-c
+/**
+ *  Stay shaped when there is less space than needed.
+ *
+ *  @param priority     priority to stay original shape
+ *  @param isHorizontal is for horizontal orientation
+ */
+-(void)q_stayShapedWhenCompressedWithPriority:(UILayoutPriority)priority
+                                  isHorizontal:(BOOL)isHorizontal;
+
+/**
+ *  Stay shaped when there are more space than needed.
+ *
+ *  @param priority     priority to stay original shape
+ *  @param isHorizontal is for horizontal orientation
+ */
+-(void)q_stayShapedWhenStretchedWithPriority:(UILayoutPriority)priority
+                                 isHorizontal:(BOOL)isHorizontal;
+```
+当同一维度放置了多个控件时，有可能会发生如下问题：当此维度上的空间多余/不足时，该拉伸/挤压谁？苹果有直接的api解决这问题的。但其非常拗口难记。所以我们写了一个包装一下。用途就是，当空间发生变化时，控件保持现状的优先级。优先级越高，保持现状的能力越高。优先级越低，空间发生变化时，第一时间要修改此控件。因为所有控件默认的优先级都是“高优先级”，所以你作为修改，降低目标控件的优先级就可以了。
+如下的例子代码就是一个聊天记录里的右侧情形：
+```objective-c
+UIView* viewWrapper = QUICK_SUBVIEW(self.view, UIView);
+UILabel* labelChatContent = QUICK_SUBVIEW(viewWrapper, UILabel);
+UIImageView* imageViewAvatar = QUICK_SUBVIEW(viewWrapper, UIImageView);
+
+NSString* layoutTree = @"H:|-(>=15)-[labelChatContent]-[imageViewAvatar]-15-| {top};\
+						 V:|-5-[imageViewAvatar]-(>=5)-|;\
+						 V:[labelChatContent]-(>=5)-|";
+
+[viewWrapper q_addConstraintsByText:layoutTree
+                        involvedViews:NSDictionaryOfVariableBindings(labelChatContent, imageViewAvatar)];
+
+[labelChatContent q_stayShapedWhenStretchedWithPriority:UILayoutPriorityDefaultLow isHorizontal:YES];
+[labelChatContent q_stayShapedWhenCompressedWithPriority:UILayoutPriorityDefaultLow isHorizontal:YES];
+```
+
+如果没有最底下的那两行，头像可能会被挤到屏幕外面。
+当然，不要忘了把label的行数设置为0.
+
+### 设置控件不同维度的比例关系
+```objective-c
+/**
+ *  Set send's width equal to another view's attribute
+ *
+ *  @param aView      target view
+ *  @param attribute  equal attribution
+ *  @param multiplier multiplier value
+ */
+-(void)q_equalWidthToView:(UIView*)aView
+       forLayoutAttribute:(NSLayoutAttribute)attribute
+               multiplier:(CGFloat)multiplier;
+
+/**
+ *  Set send's height equal to another view's attribute
+ *
+ *  @param aView      target view
+ *  @param attribute  equal attribution
+ *  @param multiplier multiplier value
+ */
+-(void)q_equalHeightToView:(UIView*)aView
+        forLayoutAttribute:(NSLayoutAttribute)attribute
+                multiplier:(CGFloat)multiplier;
+```
+**attribute只应该使用长或宽**，因为api已经明说了是设置控件的宽高的。这个api和VFL结合着使用，实现不同维度的比例约束。比如：
+- 自身宽高比例
+- 自身宽高和非sibling的控件的比例关系
+
+### 使用ScrollView
+基本所有的VC都必须要使用scrollView或者UITableView，以防止屏幕不够高的问题。如果你还没有意识到这是一个大问题的话，我只能悄悄拍拍你肩膀并提示，兄弟，别说话了，趁老板没发现这问题，赶紧去修改代码，支持这个功能。
+我们的小框架非常方便地支持此功能的。
+```objective-c
+// #import "UIScrollView+constraint.h"
+
+/**
+ *  prepare the scroll view content as same size to scroll view
+ *
+ *  @return the content view prepared.
+ */
+-(UIView*)q_prepareAutolayoutContentView;
+
+/**
+ *  Refresh the content view with updated height.
+ *  Note: Used for vertically scroll.
+ *  Should be used when widgets is dynamically added to
+ *  content view and the height is undetermined(i.e. the
+ *  widget at the bottom is not stick to bottom of content view)
+ *
+ *  @param height current updated height
+ */
+-(void)q_refreshContentViewWithHeight:(CGFloat)height;
+
+/**
+ *  Refresh the content view.
+ *  Note: Used for vertically scroll.
+ *  Should be used when the content view height is determined.
+ */
+-(void)q_refreshContentViewHeight;
+
+/**
+ *  Refresh the content view with updated width
+ *  Note: Used for horizontally scroll.
+ *  Should be used when widgets is dynamically added to content 
+ *  view and the width is undetermined.
+ *
+ *  @param width current updated width
+ */
+-(void)q_refreshContentViewWithWidth:(CGFloat)width;
+
+/**
+ *  Refresh the content view.
+ *  Note: Used for horizontally scroll.
+ *  Should be used when the content view width is determined.
+ */
+-(void)q_refreshContentViewWidth;
+```
+第一个API就是让你的scrollView准备好一切，然后它会返回一个UIView给你使用。这个返回的View就是contentView，你可以随意往里面写东西。
+一般情况下，我们的UIScrollView是覆盖整个VC的。
+你往contentView里构建完了layout，最后要做的工作就是刷新scrollView。是垂直还是水平，根据需要调用刷新api即可。但在这里又一个细节你是需要清楚的：
+如果你的contentView最底下的视图的bottom跟contentView的bottom是“粘合”起来了的，你只要调用不用提供高度的那个api就可以。如果没有粘合（此种情形最有可能是你后续需要动态地增加更多控件），你需要把contentView的高度告诉api，然后框架会提你做刷新。
+刷新的结果是，如果你的contentView没有scrollView高/宽，则滚动会被禁用，否则contentView会自动拉到适当的大小，然后帮你把滚动启动过来。
+你可以看Demo中的ScrollView部分。里面的简单例子够你学习的。
+> 近来在想，貌似ContentView中如果有输入控件，弹键盘的时候是否应该做一些东东？是个问题，看什么时候加上这个功能。
 
 ## Learn by Example
 你可以直接下载源代码，然后直接在xcode中编译运行。在模拟器中将会看到更加直接的运行效果。
