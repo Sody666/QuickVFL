@@ -11,6 +11,7 @@
 #import "QAlignmentViewController.h"
 #import "QTableViewController.h"
 #import "QScrollViewController.h"
+#import "QChatViewController.h"
 
 @interface QHomeViewController()
 @property (nonatomic, strong) UIView* viewAtBottom;
@@ -36,6 +37,7 @@
     [self addItemWithName:@"Alignment" VCClass:[QAlignmentViewController class]];
     [self addItemWithName:@"Table View" VCClass:[QTableViewController class]];
     [self addItemWithName:@"Scroll View" VCClass:[QScrollViewController class]];
+    [self addItemWithName:@"Chat List" VCClass:[QChatViewController class]];
     
     [_viewContentView q_addConstraintsByText:@"V:[_viewAtBottom]-10-|;"
                                involvedViews:NSDictionaryOfVariableBindings(_viewAtBottom)];

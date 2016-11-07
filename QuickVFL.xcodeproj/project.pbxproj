@@ -19,6 +19,9 @@
 		989CCF0F1D99115B0079C88C /* UIView+q.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF0C1D99115B0079C88C /* UIView+q.m */; };
 		989CCF121D99130F0079C88C /* QHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF111D99130F0079C88C /* QHomeViewController.m */; };
 		989CCF151D99168D0079C88C /* QAlignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCF141D99168D0079C88C /* QAlignmentViewController.m */; };
+		98C127891DD0B37A00F4538D /* QChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C127881DD0B37A00F4538D /* QChatView.m */; };
+		98C1278C1DD0CE7600F4538D /* QChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C1278B1DD0CE7600F4538D /* QChatViewController.m */; };
+		98C1278E1DD0D69C00F4538D /* chat_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 98C1278D1DD0D69C00F4538D /* chat_background.png */; };
 		98D441FC1D9E2BFB00902DE1 /* QTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D441FB1D9E2BFB00902DE1 /* QTableViewController.m */; };
 		98D441FF1D9E2CDA00902DE1 /* QTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D441FE1D9E2CDA00902DE1 /* QTableViewCell.m */; };
 		98D442021D9E36D100902DE1 /* QDemoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D442011D9E36D100902DE1 /* QDemoEntity.m */; };
@@ -53,6 +56,11 @@
 		989CCF111D99130F0079C88C /* QHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHomeViewController.m; sourceTree = "<group>"; };
 		989CCF131D99168D0079C88C /* QAlignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAlignmentViewController.h; sourceTree = "<group>"; };
 		989CCF141D99168D0079C88C /* QAlignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAlignmentViewController.m; sourceTree = "<group>"; };
+		98C127871DD0B37A00F4538D /* QChatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QChatView.h; sourceTree = "<group>"; };
+		98C127881DD0B37A00F4538D /* QChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QChatView.m; sourceTree = "<group>"; };
+		98C1278A1DD0CE7600F4538D /* QChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QChatViewController.h; sourceTree = "<group>"; };
+		98C1278B1DD0CE7600F4538D /* QChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QChatViewController.m; sourceTree = "<group>"; };
+		98C1278D1DD0D69C00F4538D /* chat_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_background.png; sourceTree = "<group>"; };
 		98D441FA1D9E2BFB00902DE1 /* QTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QTableViewController.h; sourceTree = "<group>"; };
 		98D441FB1D9E2BFB00902DE1 /* QTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QTableViewController.m; sourceTree = "<group>"; };
 		98D441FD1D9E2CDA00902DE1 /* QTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QTableViewCell.h; sourceTree = "<group>"; };
@@ -107,6 +115,7 @@
 		989CCEE21D990EA30079C88C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				98C1278D1DD0D69C00F4538D /* chat_background.png */,
 				98D442031D9E3C7F00902DE1 /* angry.png */,
 				98D442041D9E3C7F00902DE1 /* pirate.png */,
 				98D442051D9E3C7F00902DE1 /* smile.png */,
@@ -128,6 +137,7 @@
 		989CCEFA1D990F1F0079C88C /* demo */ = {
 			isa = PBXGroup;
 			children = (
+				98C127861DD0B31500F4538D /* chatList */,
 				98D441F91D9E2BD700902DE1 /* tableView */,
 				989CCF061D99115B0079C88C /* extensions */,
 				989CCF031D9910B90079C88C /* QRootViewController.h */,
@@ -164,6 +174,17 @@
 				989CCF0C1D99115B0079C88C /* UIView+q.m */,
 			);
 			path = extensions;
+			sourceTree = "<group>";
+		};
+		98C127861DD0B31500F4538D /* chatList */ = {
+			isa = PBXGroup;
+			children = (
+				98C127871DD0B37A00F4538D /* QChatView.h */,
+				98C127881DD0B37A00F4538D /* QChatView.m */,
+				98C1278A1DD0CE7600F4538D /* QChatViewController.h */,
+				98C1278B1DD0CE7600F4538D /* QChatViewController.m */,
+			);
+			path = chatList;
 			sourceTree = "<group>";
 		};
 		98D441F91D9E2BD700902DE1 /* tableView */ = {
@@ -239,6 +260,7 @@
 				98D442071D9E3C7F00902DE1 /* pirate.png in Resources */,
 				989CCEEF1D990EA30079C88C /* Assets.xcassets in Resources */,
 				98D442081D9E3C7F00902DE1 /* smile.png in Resources */,
+				98C1278E1DD0D69C00F4538D /* chat_background.png in Resources */,
 				98D442061D9E3C7F00902DE1 /* angry.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				98C1278C1DD0CE7600F4538D /* QChatViewController.m in Sources */,
 				989CCEE71D990EA30079C88C /* AppDelegate.m in Sources */,
 				989CCEE41D990EA30079C88C /* main.m in Sources */,
 				989CCF151D99168D0079C88C /* QAlignmentViewController.m in Sources */,
@@ -258,6 +281,7 @@
 				98D442021D9E36D100902DE1 /* QDemoEntity.m in Sources */,
 				989CCF051D9910B90079C88C /* QRootViewController.m in Sources */,
 				981466761DA9E0AB0019F2E1 /* QScrollViewController.m in Sources */,
+				98C127891DD0B37A00F4538D /* QChatView.m in Sources */,
 				989CCF0F1D99115B0079C88C /* UIView+q.m in Sources */,
 				989CCF001D990FA20079C88C /* UIScrollView+constraint.m in Sources */,
 				989CCF0E1D99115B0079C88C /* UIButton+block.m in Sources */,

@@ -31,6 +31,8 @@
  *
  *  @param text  VFL text
  *  @param views views involed
+ *
+ *  @return added constraints
  */
 -(NSArray*) q_addConstraintsByText:(NSString*)text
                   involvedViews:(NSDictionary*)views;
