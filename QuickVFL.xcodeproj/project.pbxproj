@@ -56,6 +56,7 @@
 		989CCF111D99130F0079C88C /* QHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QHomeViewController.m; sourceTree = "<group>"; };
 		989CCF131D99168D0079C88C /* QAlignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAlignmentViewController.h; sourceTree = "<group>"; };
 		989CCF141D99168D0079C88C /* QAlignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAlignmentViewController.m; sourceTree = "<group>"; };
+		98B978EC1DD325E90036A052 /* quickvfl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = quickvfl.h; sourceTree = "<group>"; };
 		98C127871DD0B37A00F4538D /* QChatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QChatView.h; sourceTree = "<group>"; };
 		98C127881DD0B37A00F4538D /* QChatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QChatView.m; sourceTree = "<group>"; };
 		98C1278A1DD0CE7600F4538D /* QChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QChatViewController.h; sourceTree = "<group>"; };
@@ -159,6 +160,7 @@
 				989CCEFD1D990FA20079C88C /* UIScrollView+constraint.m */,
 				989CCEFE1D990FA20079C88C /* UIView+constraint.h */,
 				989CCEFF1D990FA20079C88C /* UIView+constraint.m */,
+				98B978EC1DD325E90036A052 /* quickvfl.h */,
 			);
 			path = lib;
 			sourceTree = "<group>";
