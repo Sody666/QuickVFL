@@ -32,8 +32,8 @@
     
     
     // setting up contents of scroll view
-    UIView* verticalContentView = [scrollViewVertical q_prepareAutolayoutContentView];
-    UIView* horizontalContentView = [scrollViewHorizontal q_prepareAutolayoutContentView];
+    UIView* verticalContentView = [scrollViewVertical q_prepareAutolayoutContentViewForOrientation:QScrollOrientationVertical];
+    UIView* horizontalContentView = [scrollViewHorizontal q_prepareAutolayoutContentViewForOrientation:QScrollOrientationHorizontal];
     
     UILabel* verticalText = QUICK_SUBVIEW(verticalContentView, UILabel);
     UILabel* hozontalText = QUICK_SUBVIEW(horizontalContentView, UILabel);

@@ -22,6 +22,7 @@
 		98C127891DD0B37A00F4538D /* QChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C127881DD0B37A00F4538D /* QChatView.m */; };
 		98C1278C1DD0CE7600F4538D /* QChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98C1278B1DD0CE7600F4538D /* QChatViewController.m */; };
 		98C1278E1DD0D69C00F4538D /* chat_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 98C1278D1DD0D69C00F4538D /* chat_background.png */; };
+		98D3DB9F1DDC978E0024C01B /* QVisibilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D3DB9E1DDC978E0024C01B /* QVisibilityViewController.m */; };
 		98D441FC1D9E2BFB00902DE1 /* QTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D441FB1D9E2BFB00902DE1 /* QTableViewController.m */; };
 		98D441FF1D9E2CDA00902DE1 /* QTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D441FE1D9E2CDA00902DE1 /* QTableViewCell.m */; };
 		98D442021D9E36D100902DE1 /* QDemoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 98D442011D9E36D100902DE1 /* QDemoEntity.m */; };
@@ -62,6 +63,8 @@
 		98C1278A1DD0CE7600F4538D /* QChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QChatViewController.h; sourceTree = "<group>"; };
 		98C1278B1DD0CE7600F4538D /* QChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QChatViewController.m; sourceTree = "<group>"; };
 		98C1278D1DD0D69C00F4538D /* chat_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_background.png; sourceTree = "<group>"; };
+		98D3DB9D1DDC978E0024C01B /* QVisibilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QVisibilityViewController.h; sourceTree = "<group>"; };
+		98D3DB9E1DDC978E0024C01B /* QVisibilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QVisibilityViewController.m; sourceTree = "<group>"; };
 		98D441FA1D9E2BFB00902DE1 /* QTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QTableViewController.h; sourceTree = "<group>"; };
 		98D441FB1D9E2BFB00902DE1 /* QTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QTableViewController.m; sourceTree = "<group>"; };
 		98D441FD1D9E2CDA00902DE1 /* QTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QTableViewCell.h; sourceTree = "<group>"; };
@@ -149,6 +152,8 @@
 				989CCF141D99168D0079C88C /* QAlignmentViewController.m */,
 				981466741DA9E0AB0019F2E1 /* QScrollViewController.h */,
 				981466751DA9E0AB0019F2E1 /* QScrollViewController.m */,
+				98D3DB9D1DDC978E0024C01B /* QVisibilityViewController.h */,
+				98D3DB9E1DDC978E0024C01B /* QVisibilityViewController.m */,
 			);
 			path = demo;
 			sourceTree = "<group>";
@@ -283,6 +288,7 @@
 				98D442021D9E36D100902DE1 /* QDemoEntity.m in Sources */,
 				989CCF051D9910B90079C88C /* QRootViewController.m in Sources */,
 				981466761DA9E0AB0019F2E1 /* QScrollViewController.m in Sources */,
+				98D3DB9F1DDC978E0024C01B /* QVisibilityViewController.m in Sources */,
 				98C127891DD0B37A00F4538D /* QChatView.m in Sources */,
 				989CCF0F1D99115B0079C88C /* UIView+q.m in Sources */,
 				989CCF001D990FA20079C88C /* UIScrollView+constraint.m in Sources */,

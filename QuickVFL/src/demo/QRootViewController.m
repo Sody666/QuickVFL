@@ -33,9 +33,8 @@
     _scrollViewContent = QUICK_SUBVIEW(self.view, UIScrollView);
     [self.view q_addConstraintsByText:@"H:|[_scrollViewContent]|; V:|[_scrollViewContent]|;"
                         involvedViews:NSDictionaryOfVariableBindings(_scrollViewContent)];
-    [self.view layoutIfNeeded];
     
-    _viewContentView = [self.scrollViewContent q_prepareAutolayoutContentView];
+    _viewContentView = [self.scrollViewContent q_prepareAutolayoutContentViewForOrientation:QScrollOrientationVertical];
 }
 
 -(void)refreshContent{

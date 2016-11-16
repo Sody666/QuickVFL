@@ -20,15 +20,11 @@
     
     [self setupHorizontalAlign];
     [self setupVerticalAlign];
-    
-    [self.view layoutIfNeeded];
 
     // add a constraint to determine the content view height.
     [self.viewAtBottom.superview q_addConstraintsByText:@"V:[_viewAtBottom]-10-|"
                                           involvedViews:NSDictionaryOfVariableBindings(_viewAtBottom)];
     [self refreshContent];
-    
-    [self.view setNeedsLayout];
 }
 
 -(void)setupHorizontalAlign{
