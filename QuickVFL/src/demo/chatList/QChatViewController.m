@@ -23,7 +23,7 @@
     QChatView* chatViewC = QUICK_SUBVIEW(self.viewContentView, QChatView);
     
     NSString* layoutTree = @"\
-        V:|-[chatViewA]-[chatViewB]-[chatViewC]-(>=10)-| {left, right};\
+        V:|-[chatViewA]-[chatViewB]-[chatViewC]-| {left, right};\
         H:|-[chatViewA]-|;\
     ";
     
