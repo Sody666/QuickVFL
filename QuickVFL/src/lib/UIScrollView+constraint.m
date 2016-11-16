@@ -13,10 +13,7 @@
 static const void *UIScrollViewContentHeightKey = &UIScrollViewContentHeightKey;
 static const void *UIScrollViewContentWidthKey = &UIScrollViewContentWidthKey;
 
-static const void *UIScrollViewContentWrapperHeightKey = &UIScrollViewContentWrapperHeightKey;
-static const void *UIScrollViewContentWrapperWidthKey = &UIScrollViewContentWrapperWidthKey;
-
-static const void *UIScrollViewContentWrapperViewKey = &UIScrollViewContentWrapperViewKey;
+static const void *UIScrollViewContentViewKey = &UIScrollViewContentViewKey;
 
 @implementation UIScrollView(constraint)
 #pragma mark private methods
@@ -60,108 +57,61 @@ static const void *UIScrollViewContentWrapperViewKey = &UIScrollViewContentWrapp
     objc_setAssociatedObject(self, UIScrollViewContentWidthKey, constraint, OBJC_ASSOCIATION_RETAIN);
 }
 
-#pragma mark content wrapper getter and setter
--(NSLayoutConstraint*)constraintContentWrapperHeight{
-    return objc_getAssociatedObject(self, UIScrollViewContentWrapperHeightKey);
-}
-
--(void)setConstraintContentWrapperHeight:(NSLayoutConstraint*)constraint{
-    objc_setAssociatedObject(self, UIScrollViewContentWrapperHeightKey, constraint, OBJC_ASSOCIATION_RETAIN);
-}
-
--(NSLayoutConstraint*)constraintContentWrapperWidth{
-    return objc_getAssociatedObject(self, UIScrollViewContentWrapperWidthKey);
-}
-
--(void)setConstraintContentWrapperWidth:(NSLayoutConstraint*)constraint{
-    objc_setAssociatedObject(self, UIScrollViewContentWrapperWidthKey, constraint, OBJC_ASSOCIATION_RETAIN);
-}
 #pragma mark content view getter and setter
-
-
--(UIView*)contentWrapperView{
-    return objc_getAssociatedObject(self, UIScrollViewContentWrapperViewKey);
+-(UIView*)contentView{
+    return objc_getAssociatedObject(self, UIScrollViewContentViewKey);
 }
 
--(void)setContentWrapperView:(UIView*)view{
+-(void)setContentView:(UIView*)view{
     // weak assign
-    objc_setAssociatedObject(self, UIScrollViewContentWrapperViewKey, view, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, UIScrollViewContentViewKey, view, OBJC_ASSOCIATION_ASSIGN);
 }
 
 #pragma mark public methods
--(UIView*)q_prepareAutolayoutContentView{
-    UIView* contentView = QUICK_SUBVIEW(self, UIView);
-    UIView* outputView = QUICK_SUBVIEW(contentView, UIView);
-    
-    // set content view size as scrollView size.
-    // note that vertical/horizontal priority as normal
-    NSString* layoutTree = @"\
-    H:|-0-[contentView(selfView@751)]-0-|;\
-    V:|-0-[contentView(selfView@751)]-0-|;\
-    \
-    H:|[outputView];\
-    V:|[outputView];\
-    ";
+-(UIView*)q_prepareAutolayoutContentViewForOrientation:(QScrollOrientation)orientation{
+    UIView* viewSystemContent = QUICK_SUBVIEW(self, UIView);
+    UIView* viewUserContent = QUICK_SUBVIEW(viewSystemContent, UIView);
     UIView* selfView = self;
-    [self q_addConstraintsByText:layoutTree
-                   involvedViews:NSDictionaryOfVariableBindings(contentView,selfView, outputView)];
+    
+    
+    NSString* widthLimit = (orientation == QScrollOrientationVertical ? @"-0-|" : @"");
+    NSString* heightLimit = (orientation == QScrollOrientationHorizontal ? @"-0-|" : @"");
+    
+    NSString* layout = [ NSString stringWithFormat:@"   \
+        H:|-0-[viewSystemContent(selfView@751)]-0-|;    \
+        V:|-0-[viewSystemContent(selfView@751)]-0-|;    \
+                                                        \
+        H:|[viewUserContent]%@;                         \
+        V:|[viewUserContent]%@;                         \
+    ", widthLimit, heightLimit];
+    
+    
+    [self q_addConstraintsByText:layout
+                   involvedViews:NSDictionaryOfVariableBindings(viewSystemContent, viewUserContent, selfView)];
     
     // set a temp height, as low priority
-    self.constraintContentHeight = [self q_addConstraintsByText:@"V:[contentView(1@250)];"
-                                                           involvedViews:NSDictionaryOfVariableBindings(contentView)][0];
+    self.constraintContentHeight = [self q_addConstraintsByText:@"V:[viewSystemContent(1@250)];"
+                                                  involvedViews:NSDictionaryOfVariableBindings(viewSystemContent)][0];
     
-    self.constraintContentWidth = [self q_addConstraintsByText:@"H:[contentView(1@250)];"
-                                                          involvedViews:NSDictionaryOfVariableBindings(contentView)][0];
+    self.constraintContentWidth = [self q_addConstraintsByText:@"H:[viewSystemContent(1@250)];"
+                                                 involvedViews:NSDictionaryOfVariableBindings(viewSystemContent)][0];
     
-    self.constraintContentWrapperHeight = [outputView q_addConstraintsByText:@"V:[outputView(1@250)];"
-                                                  involvedViews:NSDictionaryOfVariableBindings(outputView)][0];
-    
-    self.constraintContentWrapperWidth = [outputView q_addConstraintsByText:@"H:[outputView(1@250)];"
-                                                 involvedViews:NSDictionaryOfVariableBindings(outputView)][0];
-
-    self.contentWrapperView = outputView;
-    return outputView;
-}
-
--(void)q_refreshContentViewWithHeight:(CGFloat)height{
-    self.constraintContentWrapperWidth.constant = self.frame.size.width;
-    self.constraintContentWrapperWidth.priority = UILayoutPriorityDefaultHigh + 3;
-    
-    self.constraintContentWrapperHeight.priority = UILayoutPriorityDefaultLow - 1;
-    
-    if(height > 0){
-        self.constraintContentWrapperHeight.constant = height;
-    }
-    
-    [self layoutIfNeeded];
-    
-    CGSize updatedSize = CGSizeMake(self.frame.size.width, height<=0?self.contentWrapperView.frame.size.height:height);
-    [self _q_refreshContentViewWithSize:updatedSize];
-}
-
-
--(void)q_refreshContentViewWithWidth:(CGFloat)width{
-    self.constraintContentWrapperHeight.constant = self.frame.size.height;
-    self.constraintContentWrapperHeight.priority = UILayoutPriorityDefaultHigh + 3;
-    
-    self.constraintContentWrapperWidth.priority = UILayoutPriorityDefaultLow - 1;
-    
-    if(width > 0){
-        self.constraintContentWrapperWidth.constant = width;
-    }
-    
-    [self.contentWrapperView layoutIfNeeded];
-    
-    CGSize updatedSize = CGSizeMake(width <=  0 ? self.contentWrapperView.frame.size.width:width, self.frame.size.height);
-    [self _q_refreshContentViewWithSize:updatedSize];
+    self.contentView = viewUserContent;
+    return viewUserContent;
 }
 
 -(void)q_refreshContentViewHeight{
-    [self q_refreshContentViewWithHeight:0];
+    [self.contentView layoutIfNeeded];
+    CGSize updatedSize = CGSizeMake(self.frame.size.width, self.contentView.frame.size.height);
+
+    [self _q_refreshContentViewWithSize:updatedSize];
 }
 
 
 -(void)q_refreshContentViewWidth{
-    [self q_refreshContentViewWithWidth:0];
+    [self.contentView layoutIfNeeded];
+    CGSize updatedSize = CGSizeMake(self.contentView.frame.size.width, self.frame.size.height);
+    
+    [self _q_refreshContentViewWithSize:updatedSize];
 }
 @end

@@ -48,6 +48,13 @@
 }
 
 -(NSArray*)_q_parseVFL:(NSString*)VFLText involvedViews:(NSDictionary*)views{
+#ifdef DEBUG
+    for (NSString* viewName in views.allKeys) {
+        NSLog(@"%p: %@", (__bridge void*)[views objectForKey:viewName], viewName);
+    }
+#endif
+    
+    
     NSMutableArray* result = [[NSMutableArray alloc] init];
     NSArray* lines = [VFLText componentsSeparatedByString:@";"];
     NSCharacterSet* emptySet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
