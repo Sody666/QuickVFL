@@ -24,6 +24,7 @@
     UINavigationController* nvc = [[UINavigationController alloc] initWithRootViewController:[[QHomeViewController alloc] init]];
     nvc.navigationBar.translucent = NO;
     
+    
     myWindow.rootViewController = nvc;
     myWindow.backgroundColor = [UIColor whiteColor];
     
