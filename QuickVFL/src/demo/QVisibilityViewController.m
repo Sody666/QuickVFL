@@ -52,10 +52,10 @@
     involvedViews:NSDictionaryOfVariableBindings(viewAWrapper, labelA, labelA1, viewBWrapper, labelB, labelB1, buttonControlA, buttonControlB, buttonControlC, buttonControlD, viewButtonWrapper, labelC, labelD)];
     
     // add extra control constraint
-    self.constraintHideA = [self.viewContentView q_addConstraintsByText:@"V:[viewAWrapper(0@250)];" involvedViews:NSDictionaryOfVariableBindings(viewAWrapper)][0];
-    self.constraintHideB = [self.viewContentView q_addConstraintsByText:@"V:[viewBWrapper(0@250)];" involvedViews:NSDictionaryOfVariableBindings(viewBWrapper)][0];
-    self.constraintHideC = [labelC q_addConstraintsByText:@"V:[labelC(0@250)];" involvedViews:NSDictionaryOfVariableBindings(labelC)][0];
-    self.constraintHideD = [labelD q_addConstraintsByText:@"V:[labelD(0@250)];" involvedViews:NSDictionaryOfVariableBindings(labelD)][0];
+    self.constraintHideA = [viewAWrapper q_addHideConstraintVertically];
+    self.constraintHideB = [viewBWrapper q_addHideConstraintVertically];
+    self.constraintHideC = [labelC q_addHideConstraintVertically];
+    self.constraintHideD = [labelD q_addHideConstraintVertically];
     
     
     labelA.text = @"A label.";
@@ -70,9 +70,6 @@
     labelB1.backgroundColor = [UIColor grayColor];
     labelC.backgroundColor = [UIColor redColor];
     labelD.backgroundColor = [UIColor yellowColor];
-    
-    viewAWrapper.clipsToBounds = YES;
-    viewBWrapper.clipsToBounds = YES;
     
     viewAWrapper.backgroundColor = [UIColor lightGrayColor];
     viewBWrapper.backgroundColor = [UIColor darkGrayColor];

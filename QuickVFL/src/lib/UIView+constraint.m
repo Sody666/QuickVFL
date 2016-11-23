@@ -246,4 +246,16 @@
     
     [ancestor addConstraint:constraint];
 }
+
+-(NSLayoutConstraint*)q_addHideConstraintHorizontally{
+    UIView* selfView = self;
+    self.clipsToBounds = YES;
+    return [self q_addConstraintsByText:@"H:[selfView(0@250)];" involvedViews:NSDictionaryOfVariableBindings(selfView)][0];
+}
+
+-(NSLayoutConstraint*)q_addHideConstraintVertically{
+    UIView* selfView = self;
+    self.clipsToBounds = YES;
+    return [self q_addConstraintsByText:@"V:[selfView(0@250)];" involvedViews:NSDictionaryOfVariableBindings(selfView)][0];
+}
 @end

@@ -76,4 +76,23 @@
 -(void)q_equalHeightToView:(UIView*)aView
         forLayoutAttribute:(NSLayoutAttribute)attribute
                 multiplier:(CGFloat)multiplier;
+
+
+/**
+ *  Add a constraint to hide self.
+ *  Note: The result constraint will be low priority, and 
+ *  clipsToBounds property of the view will be set to YES.
+ *
+ *  @return constraint added.
+ */
+-(NSLayoutConstraint*)q_addHideConstraintHorizontally;
+
+/**
+ *  Add a constraint to hide self.
+ *  Note: The result constraint will be low priority, and
+ *  clipsToBounds property of the view will be set to YES.
+ *
+ *  @return constraint added.
+ */
+-(NSLayoutConstraint*)q_addHideConstraintVertically;
 @end
