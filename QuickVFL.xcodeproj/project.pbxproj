@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		981466761DA9E0AB0019F2E1 /* QScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 981466751DA9E0AB0019F2E1 /* QScrollViewController.m */; };
+		9829D8741DE8763200925971 /* QAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9829D8731DE8763200925971 /* QAnimationViewController.m */; };
 		989CCEE41D990EA30079C88C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCEE31D990EA30079C88C /* main.m */; };
 		989CCEE71D990EA30079C88C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCEE61D990EA30079C88C /* AppDelegate.m */; };
 		989CCEEF1D990EA30079C88C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 989CCEEE1D990EA30079C88C /* Assets.xcassets */; };
@@ -34,6 +35,8 @@
 /* Begin PBXFileReference section */
 		981466741DA9E0AB0019F2E1 /* QScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QScrollViewController.h; sourceTree = "<group>"; };
 		981466751DA9E0AB0019F2E1 /* QScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QScrollViewController.m; sourceTree = "<group>"; };
+		9829D8721DE8763200925971 /* QAnimationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAnimationViewController.h; sourceTree = "<group>"; };
+		9829D8731DE8763200925971 /* QAnimationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAnimationViewController.m; sourceTree = "<group>"; };
 		989CCEDF1D990EA30079C88C /* QuickVFL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickVFL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		989CCEE31D990EA30079C88C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		989CCEE51D990EA30079C88C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -154,6 +157,8 @@
 				981466751DA9E0AB0019F2E1 /* QScrollViewController.m */,
 				98D3DB9D1DDC978E0024C01B /* QVisibilityViewController.h */,
 				98D3DB9E1DDC978E0024C01B /* QVisibilityViewController.m */,
+				9829D8721DE8763200925971 /* QAnimationViewController.h */,
+				9829D8731DE8763200925971 /* QAnimationViewController.m */,
 			);
 			path = demo;
 			sourceTree = "<group>";
@@ -284,6 +289,7 @@
 				989CCEE41D990EA30079C88C /* main.m in Sources */,
 				989CCF151D99168D0079C88C /* QAlignmentViewController.m in Sources */,
 				98D441FF1D9E2CDA00902DE1 /* QTableViewCell.m in Sources */,
+				9829D8741DE8763200925971 /* QAnimationViewController.m in Sources */,
 				989CCF121D99130F0079C88C /* QHomeViewController.m in Sources */,
 				98D442021D9E36D100902DE1 /* QDemoEntity.m in Sources */,
 				989CCF051D9910B90079C88C /* QRootViewController.m in Sources */,

@@ -13,6 +13,7 @@
 #import "QScrollViewController.h"
 #import "QChatViewController.h"
 #import "QVisibilityViewController.h"
+#import "QAnimationViewController.h"
 
 @interface QHomeViewController()
 @property (nonatomic, strong) UIView* viewAtBottom;
@@ -40,6 +41,7 @@
     [self addItemWithName:@"Scroll View" VCClass:[QScrollViewController class]];
     [self addItemWithName:@"Chat List" VCClass:[QChatViewController class]];
     [self addItemWithName:@"Visibility Control" VCClass:[QVisibilityViewController class]];
+    [self addItemWithName:@"Animation" VCClass:[QAnimationViewController class]];
     
     [_viewContentView q_addConstraintsByText:@"V:[_viewAtBottom]-10-|;"
                                involvedViews:NSDictionaryOfVariableBindings(_viewAtBottom)];
