@@ -56,6 +56,20 @@
     
     
     NSMutableArray* result = [[NSMutableArray alloc] init];
+    if(VFLText.length == 0){
+        return result;
+    }
+    
+    NSString* pattern = @"/\\*([^*]|[\r\n]|(\\*+([^*/]|[\r\n])))*\\*+/";
+    NSRegularExpression *regExpress = [[NSRegularExpression alloc] initWithPattern:pattern
+                                                                           options:NSRegularExpressionCaseInsensitive
+                                                                             error:nil];
+    VFLText = [regExpress stringByReplacingMatchesInString:VFLText
+                                                   options:NSMatchingWithTransparentBounds
+                                                     range:NSMakeRange(0, VFLText.length)
+                                              withTemplate:@""];
+    
+    
     NSArray* lines = [VFLText componentsSeparatedByString:@";"];
     NSCharacterSet* emptySet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     NSCharacterSet* optionSet = [NSCharacterSet characterSetWithCharactersInString:@"{}"];
@@ -70,7 +84,8 @@
         components = nil;
         involvedViews = nil;
         
-        singleLineContraint = [line stringByTrimmingCharactersInSet:emptySet];
+        // remove comments and white space
+        singleLineContraint = [[line stringByReplacingOccurrencesOfString:pattern withString:@"" options:NSRegularExpressionSearch range:NSMakeRange(0, line.length)] stringByTrimmingCharactersInSet:emptySet];
         
         if(singleLineContraint.length == 0){
             continue;
@@ -82,14 +97,15 @@
             constraintText = components.firstObject;
         } else if(components.count == 3){
             constraintText = [components.firstObject stringByTrimmingCharactersInSet:emptySet];
-            alignOption = [self _q_parseConstraintOptionsByText:components[1]];
+            alignOption = [self _lu_parseConstraintOptionsByText:components[1]];
         }
         
-        involvedViews = [self _q_involedViewsInVFLText:constraintText totalViews:views];
-        BOOL proceededCenterOption = [self _q_processCenterWithVFL:constraintText
+        involvedViews = [self _lu_involedViewsInVFLText:constraintText totalViews:views];
+        BOOL proceededCenterOption = [self _lu_processCenterWithVFL:constraintText
                                                       involvedViews:involvedViews
                                                             options:alignOption];
         if(proceededCenterOption){
+            // remove center x and center y option
             alignOption &= (~(NSLayoutFormatAlignAllCenterX|NSLayoutFormatAlignAllCenterY));
         }
         
@@ -97,19 +113,7 @@
                                      constraintsWithVisualFormat:constraintText
                                      options:alignOption
                                      metrics:nil
-                                     views:involvedViews]
-         ];
-        
-//        NSMutableString* VFLDebuging = [constraintText mutableCopy];
-//        NSRange wholeRange = NSMakeRange(0, [constraintText length]);
-//        for (NSString* viewName in involvedViews) {
-//            UIView* widget = [involvedViews valueForKey:viewName];
-//            NSString* addressName = [NSString stringWithFormat:@"%p", widget];
-//            [VFLDebuging replaceOccurrencesOfString:viewName withString:addressName options:NSLiteralSearch range:wholeRange];
-//            wholeRange = NSMakeRange(0, [VFLDebuging length]);
-//        }
-//        
-//        NSLog(@"\nHuman: %@\nRobot: %@", constraintText, VFLDebuging);
+                                     views:involvedViews]];
     }
     
     return result;
