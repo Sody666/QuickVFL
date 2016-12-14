@@ -97,11 +97,11 @@
             constraintText = components.firstObject;
         } else if(components.count == 3){
             constraintText = [components.firstObject stringByTrimmingCharactersInSet:emptySet];
-            alignOption = [self _lu_parseConstraintOptionsByText:components[1]];
+            alignOption = [self _q_parseConstraintOptionsByText:components[1]];
         }
         
-        involvedViews = [self _lu_involedViewsInVFLText:constraintText totalViews:views];
-        BOOL proceededCenterOption = [self _lu_processCenterWithVFL:constraintText
+        involvedViews = [self _q_involedViewsInVFLText:constraintText totalViews:views];
+        BOOL proceededCenterOption = [self _q_processCenterWithVFL:constraintText
                                                       involvedViews:involvedViews
                                                             options:alignOption];
         if(proceededCenterOption){
@@ -164,8 +164,7 @@
 /**
  *  Calculate the first common ansester for two views
  *
- *  @param firstView one view
- *  @param otherView the other view
+ *  @param aView the other view
  *
  *  @return common ansenster. nil if no common view
  */
