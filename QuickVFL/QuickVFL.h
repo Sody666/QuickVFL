@@ -2,8 +2,8 @@
 //  QuickVFL.h
 //  QuickVFL
 //
-//  Created by sudi on 2016/12/14.
-//  Copyright © 2016年 quickVFL. All rights reserved.
+//  Created by sudi on 2017/1/15.
+//  Copyright © 2017年 sudi. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -15,5 +15,6 @@ FOUNDATION_EXPORT double QuickVFLVersionNumber;
 FOUNDATION_EXPORT const unsigned char QuickVFLVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <QuickVFL/PublicHeader.h>
-#import <QuickVFL/quickvfl.h>
+#import <QuickVFL/QuickVFL.h>
+
 

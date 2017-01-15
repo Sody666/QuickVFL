@@ -10,6 +10,8 @@
 
 @interface QTableViewCell : UITableViewCell
 @property (nonatomic, strong) NSString* entityId;
+@property (nonatomic, strong) NSString* path;
+@property (nonatomic, assign) BOOL isLegalState;
 
 -(void)fillWithTitle:(NSString*)title
          description:(NSString*)description
@@ -17,4 +19,6 @@
               avatar:(UIImage*)avatar;
 
 -(CGFloat)cellHeight;
+
++(NSString*)pathForIndexPath:(NSIndexPath*)indexPath;
 @end

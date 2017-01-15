@@ -10,10 +10,13 @@
 #import "QDemoEntity.h"
 #import "QTableViewCell.h"
 
+
+#define kCellIdentifier @"QCell"
+
 @interface QTableViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, weak) UITableView* tableViewContents;
-@property (nonatomic, weak) QTableViewCell* sampleCell;
 @property (nonatomic, strong) NSArray* arrayItems;
+@property (nonatomic, strong) NSMutableDictionary* dictCellCache;
 @end
 
 @implementation QTableViewController
@@ -23,19 +26,11 @@
     self.title = @"Table View";
     
     _tableViewContents = QUICK_SUBVIEW(self.view, UITableView);
+
     
-    // using sample cell to calculate will comsume double enegry
-    // while refreshing the table view.
-    // Do you know how to remove the unnecessary cost? There are tricks.
-    // Try your best to do it.
-    // This demo focus on VFL.
-    _sampleCell = QUICK_SUBVIEW(self.view, QTableViewCell);
-    _sampleCell.hidden = YES;
-    
-    NSString* layoutTree = @"H:|[_tableViewContents]|;V:|[_tableViewContents]|;\
-    H:|[_sampleCell]|;V:|[_sampleCell];";
+    NSString* layoutTree = @"H:|[_tableViewContents]|;V:|[_tableViewContents]|;";
     [self.view q_addConstraintsByText:layoutTree
-                        involvedViews:NSDictionaryOfVariableBindings(_tableViewContents, _sampleCell)];
+                        involvedViews:NSDictionaryOfVariableBindings(_tableViewContents)];
     
     [self.view layoutIfNeeded];
     
@@ -46,7 +41,7 @@
 -(void)setupTableView{
     self.tableViewContents.rowHeight = UITableViewAutomaticDimension;
     self.tableViewContents.estimatedRowHeight = 44;
-    [self.tableViewContents registerClass:[QTableViewCell class] forCellReuseIdentifier:@"QCell"];
+    [self.tableViewContents registerClass:[QTableViewCell class] forCellReuseIdentifier:kCellIdentifier];
     self.tableViewContents.dataSource = self;
     self.tableViewContents.delegate = self;
     
@@ -96,18 +91,43 @@
     self.arrayItems = totalItems;
 }
 
+-(QTableViewCell*)cellForIndexPath:(NSIndexPath*)indexPath{
+    if(self.dictCellCache == nil){
+        self.dictCellCache = [[NSMutableDictionary alloc] init];
+    }
+    
+    NSString* path = [QTableViewCell pathForIndexPath:indexPath];
+    QTableViewCell* result = [self.dictCellCache objectForKey:path];
+    if(result == nil){
+        result = [[QTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                       reuseIdentifier:kCellIdentifier];
+        result.path = path;
+        [self.dictCellCache setObject:result forKey:path];
+    }
+    
+    return result;
+}
+
+-(void)fillCell:(QTableViewCell*)cell withEntity:(QDemoEntity*)entity{
+    [cell fillWithTitle:entity.title
+            description:entity.desc
+                   note:entity.note
+                 avatar:entity.avatar];
+    
+    [cell layoutIfNeeded];
+    cell.isLegalState = YES;
+}
+
 #pragma mark table view delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    QDemoEntity* entity = [self.arrayItems objectAtIndex:indexPath.row];
     
-    [self.sampleCell fillWithTitle:entity.title
-                       description:entity.desc
-                              note:entity.note
-                            avatar:entity.avatar];
+    QTableViewCell* cell = [self cellForIndexPath:indexPath];
     
-    // flush the layout requests before calculating the height.
-    [self.sampleCell layoutIfNeeded];
-    return [self.sampleCell cellHeight];
+    if (!cell.isLegalState) {
+        [self fillCell:cell withEntity:[self.arrayItems objectAtIndex:indexPath.row]];
+    }
+    
+    return [cell cellHeight];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -115,14 +135,22 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    QTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"QCell"];
-    QDemoEntity* entity = [self.arrayItems objectAtIndex:indexPath.row];
-    [cell fillWithTitle:entity.title
-                       description:entity.desc
-                              note:entity.note
-                            avatar:entity.avatar];
+    QTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
     
-    [cell setNeedsLayout];
+    if(cell == nil){
+        // should not be here
+        cell = [self cellForIndexPath:indexPath];
+    }else{
+        if(cell.path.length > 0){
+            [self.dictCellCache removeObjectForKey:cell.path];
+        }
+        
+        cell.path = [QTableViewCell pathForIndexPath:indexPath];
+        [self.dictCellCache setObject:cell forKey:cell.path];
+    }
+    
+    [self fillCell:cell withEntity:[self.arrayItems objectAtIndex:indexPath.row]];
+    
     return cell;
 }
 @end

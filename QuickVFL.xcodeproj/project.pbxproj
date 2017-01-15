@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		981466761DA9E0AB0019F2E1 /* QScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 981466751DA9E0AB0019F2E1 /* QScrollViewController.m */; };
+		9821EF481E2BB9F9008EBE41 /* QuickVFL.h in Headers */ = {isa = PBXBuildFile; fileRef = 9821EF461E2BB9F9008EBE41 /* QuickVFL.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9821EF4D1E2BBAB7008EBE41 /* UIScrollView+constraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCEFD1D990FA20079C88C /* UIScrollView+constraint.m */; };
+		9821EF4F1E2BBAB7008EBE41 /* UIView+constraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCEFF1D990FA20079C88C /* UIView+constraint.m */; };
+		9821EF511E2BBADE008EBE41 /* UIScrollView+constraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 989CCEFC1D990FA20079C88C /* UIScrollView+constraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9821EF521E2BBADE008EBE41 /* UIView+constraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 989CCEFE1D990FA20079C88C /* UIView+constraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9821EF531E2BBADE008EBE41 /* quickvfl.h in Headers */ = {isa = PBXBuildFile; fileRef = 98B978EC1DD325E90036A052 /* quickvfl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9829D8741DE8763200925971 /* QAnimationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9829D8731DE8763200925971 /* QAnimationViewController.m */; };
 		989CCEE41D990EA30079C88C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCEE31D990EA30079C88C /* main.m */; };
 		989CCEE71D990EA30079C88C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 989CCEE61D990EA30079C88C /* AppDelegate.m */; };
@@ -35,9 +41,12 @@
 /* Begin PBXFileReference section */
 		981466741DA9E0AB0019F2E1 /* QScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QScrollViewController.h; sourceTree = "<group>"; };
 		981466751DA9E0AB0019F2E1 /* QScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QScrollViewController.m; sourceTree = "<group>"; };
+		9821EF441E2BB9F9008EBE41 /* QuickVFL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = QuickVFL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9821EF461E2BB9F9008EBE41 /* QuickVFL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuickVFL.h; sourceTree = "<group>"; };
+		9821EF471E2BB9F9008EBE41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9829D8721DE8763200925971 /* QAnimationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QAnimationViewController.h; sourceTree = "<group>"; };
 		9829D8731DE8763200925971 /* QAnimationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QAnimationViewController.m; sourceTree = "<group>"; };
-		989CCEDF1D990EA30079C88C /* QuickVFL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickVFL.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		989CCEDF1D990EA30079C88C /* QuickVFLDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickVFLDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		989CCEE31D990EA30079C88C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		989CCEE51D990EA30079C88C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		989CCEE61D990EA30079C88C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -80,6 +89,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9821EF401E2BB9F9008EBE41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		989CCEDC1D990EA30079C88C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -90,10 +106,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9821EF451E2BB9F9008EBE41 /* QuickVFL */ = {
+			isa = PBXGroup;
+			children = (
+				9821EF461E2BB9F9008EBE41 /* QuickVFL.h */,
+				9821EF471E2BB9F9008EBE41 /* Info.plist */,
+			);
+			path = QuickVFL;
+			sourceTree = "<group>";
+		};
 		989CCED61D990EA30079C88C = {
 			isa = PBXGroup;
 			children = (
 				989CCEE11D990EA30079C88C /* QuickVFL */,
+				9821EF451E2BB9F9008EBE41 /* QuickVFL */,
 				989CCEE01D990EA30079C88C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,7 +127,8 @@
 		989CCEE01D990EA30079C88C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				989CCEDF1D990EA30079C88C /* QuickVFL.app */,
+				989CCEDF1D990EA30079C88C /* QuickVFLDemo.app */,
+				9821EF441E2BB9F9008EBE41 /* QuickVFL.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,10 +241,42 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		9821EF411E2BB9F9008EBE41 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9821EF481E2BB9F9008EBE41 /* QuickVFL.h in Headers */,
+				9821EF511E2BBADE008EBE41 /* UIScrollView+constraint.h in Headers */,
+				9821EF521E2BBADE008EBE41 /* UIView+constraint.h in Headers */,
+				9821EF531E2BBADE008EBE41 /* quickvfl.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		989CCEDE1D990EA30079C88C /* QuickVFL */ = {
+		9821EF431E2BB9F9008EBE41 /* QuickVFL */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 989CCEF61D990EA30079C88C /* Build configuration list for PBXNativeTarget "QuickVFL" */;
+			buildConfigurationList = 9821EF491E2BB9F9008EBE41 /* Build configuration list for PBXNativeTarget "QuickVFL" */;
+			buildPhases = (
+				9821EF3F1E2BB9F9008EBE41 /* Sources */,
+				9821EF401E2BB9F9008EBE41 /* Frameworks */,
+				9821EF411E2BB9F9008EBE41 /* Headers */,
+				9821EF421E2BB9F9008EBE41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QuickVFL;
+			productName = QuickVFL;
+			productReference = 9821EF441E2BB9F9008EBE41 /* QuickVFL.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		989CCEDE1D990EA30079C88C /* QuickVFLDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 989CCEF61D990EA30079C88C /* Build configuration list for PBXNativeTarget "QuickVFLDemo" */;
 			buildPhases = (
 				989CCEDB1D990EA30079C88C /* Sources */,
 				989CCEDC1D990EA30079C88C /* Frameworks */,
@@ -227,9 +286,9 @@
 			);
 			dependencies = (
 			);
-			name = QuickVFL;
+			name = QuickVFLDemo;
 			productName = QuickVFL;
-			productReference = 989CCEDF1D990EA30079C88C /* QuickVFL.app */;
+			productReference = 989CCEDF1D990EA30079C88C /* QuickVFLDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -241,8 +300,13 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = sudi;
 				TargetAttributes = {
+					9821EF431E2BB9F9008EBE41 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
 					989CCEDE1D990EA30079C88C = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 4TF6TS28RE;
 					};
 				};
 			};
@@ -259,12 +323,20 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				989CCEDE1D990EA30079C88C /* QuickVFL */,
+				989CCEDE1D990EA30079C88C /* QuickVFLDemo */,
+				9821EF431E2BB9F9008EBE41 /* QuickVFL */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9821EF421E2BB9F9008EBE41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		989CCEDD1D990EA30079C88C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -280,6 +352,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9821EF3F1E2BB9F9008EBE41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9821EF4D1E2BBAB7008EBE41 /* UIScrollView+constraint.m in Sources */,
+				9821EF4F1E2BBAB7008EBE41 /* UIView+constraint.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		989CCEDB1D990EA30079C88C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -308,6 +389,64 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		9821EF4A1E2BB9F9008EBE41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = QuickVFL/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.quick.QuickVFL;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9821EF4B1E2BB9F9008EBE41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = QuickVFL/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.quick.QuickVFL;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		989CCEF41D990EA30079C88C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -394,6 +533,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4TF6TS28RE;
 				GCC_PREFIX_HEADER = QuickVFL/PrefixHeader.pch;
 				INFOPLIST_FILE = QuickVFL/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -407,6 +547,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4TF6TS28RE;
 				GCC_PREFIX_HEADER = QuickVFL/PrefixHeader.pch;
 				INFOPLIST_FILE = QuickVFL/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -419,6 +560,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9821EF491E2BB9F9008EBE41 /* Build configuration list for PBXNativeTarget "QuickVFL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9821EF4A1E2BB9F9008EBE41 /* Debug */,
+				9821EF4B1E2BB9F9008EBE41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		989CCEDA1D990EA30079C88C /* Build configuration list for PBXProject "QuickVFL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -428,7 +577,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		989CCEF61D990EA30079C88C /* Build configuration list for PBXNativeTarget "QuickVFL" */ = {
+		989CCEF61D990EA30079C88C /* Build configuration list for PBXNativeTarget "QuickVFLDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				989CCEF71D990EA30079C88C /* Debug */,

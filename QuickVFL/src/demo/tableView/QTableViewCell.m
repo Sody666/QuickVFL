@@ -86,12 +86,12 @@
     _labelNote.font = [UIFont italicSystemFontOfSize:8];
     
     
-    _viewWrapper.backgroundColor = [UIColor grayColor ];
-    _labelTitle.backgroundColor = [UIColor redColor];
-    _labelDescription.backgroundColor = [UIColor greenColor];
-    _labelNote.backgroundColor = [UIColor blueColor];
-    _imageViewAvatar.backgroundColor = [UIColor yellowColor];
-    viewCenterWrapper.backgroundColor = [UIColor orangeColor];
+//    _viewWrapper.backgroundColor = [UIColor grayColor ];
+//    _labelTitle.backgroundColor = [UIColor redColor];
+//    _labelDescription.backgroundColor = [UIColor greenColor];
+//    _labelNote.backgroundColor = [UIColor blueColor];
+//    _imageViewAvatar.backgroundColor = [UIColor yellowColor];
+//    viewCenterWrapper.backgroundColor = [UIColor orangeColor];
 }
 
 -(void)fillWithTitle:(NSString*)title
@@ -116,5 +116,9 @@
 
 -(CGFloat)cellHeight{
     return self.viewWrapper.frame.size.height;
+}
+
++(NSString*)pathForIndexPath:(NSIndexPath*)indexPath{
+    return [NSString stringWithFormat:@"%ld_%ld", indexPath.section, indexPath.row];
 }
 @end
