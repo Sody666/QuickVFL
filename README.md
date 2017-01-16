@@ -26,3 +26,32 @@ QuickVFL是一个基于苹果VFL的构建视图的小框架。它特别适用于
 
 ##通过实例学习QuickVFL
 通过例子的方式进行学习是最快的。在此之前，建议你先花十分钟看看（如果之前已经知道，你依然可以温故而知新）[苹果官方VFL文档](https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html "VFL")
+
+###三个竖直方向并列的Label
+先来点简单的嘛
+```objective-c
+    UILabel* labelA = QUICK_SUBVIEW(self.view, UILabel);
+    UILabel* labelB = QUICK_SUBVIEW(self.view, UILabel);
+    UILabel* labelC = QUICK_SUBVIEW(self.view, UILabel);
+    
+    NSString* layout = @"                                 \
+    /* 定义好一个标签的左右边际 */                               \
+    H:|-[labelA]-|;                                         \
+                                                            \
+    /* 竖直方向上定义好三个标签的方位关系。最后的左右是指本语句中的     \
+       所有控件都左右对齐。也即是A、B、C左右对齐。                  \
+       但因为A的左右边际已经确定，所以三个控件的左右边际就确定下来了*/  \
+    V:|-[labelA]-[labelB]-[labelC]-| {left, right};";
+    
+    [self.view q_addConstraintsByText:layout
+                        involvedViews:NSDictionaryOfVariableBindings(labelA, labelB, labelC)];
+```
+如果忽略layout字符串中的注释，你会发现就两个语句就把布局定下来了。干净利索！运行的结果是三个标签从上到下依次排列，左右对齐。因为界面蛮简单的，我就补贴图了。
+但有几个知识点要指出来：
+- 每个语句必须要以分号结束
+- 多行的时候要用\分隔。这个应该是C语言的基本知识
+- 注释遵循C语言的方式
+- 整个构建界面步骤就是：
+  1.   添加控件（QUICK_SUBVIEW）到其superView上
+  2.   构建VFL语句
+  3.   把语句添加到最外部的视图上
