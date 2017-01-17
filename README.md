@@ -24,6 +24,131 @@ QuickVFL是一个基于苹果VFL的构建视图的小框架。它特别适用于
 ###更多技巧
 如果你需要调试VFL，则可以设置enableVFLDebug=YES;这是一个QuickVFL里定义的全局的布尔值
 
+##API说明
+QuickVFL的API并不多，掌握api的使用，能使你在布局的时候得心应手。
+```objective-c
+QUICK_SUBVIEW(superView, subviewClass)
+
+```
+这是一个宏，意思是给superView添加一个类型为subviewClass的控件。宏的返回值是实例化好的控件。
+
+```objective-c
+/**
+ *  add autolayout constraint to me.
+ *
+ *  @param text  VFL text
+ *  @param views views involed
+ *
+ *  @return added constraints
+ */
+-(NSArray*) q_addConstraintsByText:(NSString*)text
+                  involvedViews:(NSDictionary*)views;
+```
+UIView的延伸方法。请注意的是，调用者必须是VFL语句描述的所有控件的共同superView。
+
+```objective-c
+/**
+ *  Stay shaped when there is less space than needed.
+ *
+ *  @param priority     priority to stay original shape
+ *  @param isHorizontal is for horizontal orientation
+ */
+-(void)q_stayShapedWhenCompressedWithPriority:(UILayoutPriority)priority
+                                  isHorizontal:(BOOL)isHorizontal;
+
+/**
+ *  Stay shaped when there are more space than needed.
+ *
+ *  @param priority     priority to stay original shape
+ *  @param isHorizontal is for horizontal orientation
+ */
+-(void)q_stayShapedWhenStretchedWithPriority:(UILayoutPriority)priority
+                                 isHorizontal:(BOOL)isHorizontal;
+```
+当约束描述的控件发生控件不足、多余时，如何处理他们跟原形之间的关系。一般情况下，如果同一水平线上有多个控件，都要通过这两个接口设置他们的控制优先级。优先级越高，保持自己不受外部影响的能力就越高。
+另外，其实这两个接口对应苹果的两个很拗口的compress和hugging的接口。
+
+```objective-c
+/**
+ *  Set send's width equal to another view's attribute
+ *
+ *  @param aView      target view
+ *  @param attribute  equal attribution
+ *  @param multiplier multiplier value
+ */
+-(void)q_equalWidthToView:(UIView*)aView
+       forLayoutAttribute:(NSLayoutAttribute)attribute
+               multiplier:(CGFloat)multiplier;
+
+/**
+ *  Set send's height equal to another view's attribute
+ *
+ *  @param aView      target view
+ *  @param attribute  equal attribution
+ *  @param multiplier multiplier value
+ */
+-(void)q_equalHeightToView:(UIView*)aView
+        forLayoutAttribute:(NSLayoutAttribute)attribute
+                multiplier:(CGFloat)multiplier;
+```
+设置调用者和别的控件的宽高比。
+
+```objective-c
+/**
+ *  Add a constraint to hide self.
+ *  Note: The result constraint will be low priority, and 
+ *  clipsToBounds property of the view will be set to YES.
+ *
+ *  @return constraint added.
+ */
+-(NSLayoutConstraint*)q_addHideConstraintHorizontally;
+
+/**
+ *  Add a constraint to hide self.
+ *  Note: The result constraint will be low priority, and
+ *  clipsToBounds property of the view will be set to YES.
+ *
+ *  @return constraint added.
+ */
+-(NSLayoutConstraint*)q_addHideConstraintVertically;
+```
+针对水平、竖直方向隐藏控件的接口
+
+```objective-c
+/**
+ *  Prepare the content view for scroll view.
+ *
+ *  @param orientation the orientation for future use
+ *
+ *  @return prepared content view
+ */
+-(UIView*)q_prepareAutolayoutContentViewForOrientation:(QScrollOrientation)orientation;
+```
+UIScrollView的延伸接口。用于生成contentView。你后面要做的东西就是往此api返回的UIView里添加你的布局。
+
+```objective-c
+/**
+ *  Refresh the content view.
+ *  Make sure the height of the content view is determined before calling this.
+ *
+ *  Note: Used for vertically scroll.
+ *
+ *  Should be used when the content view height is determined.
+ */
+-(void)q_refreshContentViewHeight;
+
+/**
+ *  Refresh the content view.
+ *  Make sure the height of the content view is determined before calling this.
+ *
+ *  Note: Used for horizontally scroll.
+ *
+ *  Should be used when the content view width is determined.
+ */
+-(void)q_refreshContentViewWidth;
+```
+contentView的内容发生变化之后，使用此两接口更新高度/宽度。这里的刷新方向对应上一个接口里的初始化朝向。
+
 ##通过实例学习QuickVFL
 通过例子的方式进行学习是最快的。在此之前，建议你先花十分钟看看（如果之前已经知道，你依然可以温故而知新）[苹果官方VFL文档](https://developer.apple.com/library/content/documentation/UserExperience/Conceptual/AutolayoutPG/VisualFormatLanguage.html "VFL")
 
