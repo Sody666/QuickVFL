@@ -55,3 +55,70 @@ QuickVFL是一个基于苹果VFL的构建视图的小框架。它特别适用于
   1.   添加控件（QUICK_SUBVIEW）到其superView上
   2.   构建VFL语句
   3.   把语句添加到最外部的视图上
+
+###约束优先级处理
+约束优先级的作用是，在**多条约束对同一个效果**有不同的作用的时候（也就是多条约束起了冲突），优先级最高的约束起决定作用。如果几条约束的优先级是一样的，则系统选择一条保持，其他的降低优先级。
+所以我们在布局的时候，尽量降低约束冲突。如果有冲突，也要设置优先级定向选择，不要把最终的选择交给系统，这样可能会使你的程序处于一种不可预测的状态中。
+我们来看一段代码：
+```objective-c
+    UIView* viewWrapperA = QUICK_SUBVIEW(self.view, UIView);
+    UIView* viewWrapperB = QUICK_SUBVIEW(self.view, UIView);
+    UILabel* labelA1 = QUICK_SUBVIEW(viewWrapperA, UILabel);
+    UILabel* labelA2 = QUICK_SUBVIEW(viewWrapperA, UILabel);
+    UILabel* labelB1 = QUICK_SUBVIEW(viewWrapperB, UILabel);
+    UILabel* labelB2 = QUICK_SUBVIEW(viewWrapperB, UILabel);
+    
+    NSString* layout = @"\
+    /* 先放置好两个标签容器 */\
+    H:|[viewWrapperA]|;\
+    V:|-[viewWrapperA][viewWrapperB] {left, right};\
+    \
+        /* A容器的内容 */\
+        H:|-[labelA1(200@750)][labelA2(200@740)]-| {top, bottom};\
+        V:|[labelA1]|;\
+    \
+        /* B容器的内容 */\
+        H:|-[labelB1(200@740)][labelB2(200@750)]-| {top, bottom};\
+        V:|[labelB1]|;\
+    ";
+    
+    [self.view q_addConstraintsByText:layout
+                        involvedViews:NSDictionaryOfVariableBindings(viewWrapperA, viewWrapperB, labelA1, labelA2, labelB1, labelB2)];
+    
+    labelA1.text = @"A1 A1 A1 A1 A1 A1 A1";
+    labelA2.text = @"A2 A2 A2 A2 A2 A2 A2";
+    labelB1.text = @"B1 B1 B1 B1 B1 B1 B1";
+    labelB2.text = @"B2 B2 B2 B2 B2 B2 B2";
+```
+在每一个标签容器里，两个标签都要求宽度要到200，可是屏幕宽度总共只有320，因为两标签的宽度约束发生了冲突。但是所有两个标签的优先级不一样，所以最终的运行效果是，有限极高的约束得到满足，剩下的空间分配给剩下的控件。
+运行的截图如下：
+常用的约束使用场景是针对具体情况改变控件的布局。比如，改变大小，改变位置，改变隐藏等。做法是，针对不同的布局，添加各自的约束。然后在想使用某布局的时候，提高相应约束的优先级，降低其他约束的优先级。具体的代码，请参看Demo项目里的Visibility Control页面。
+知识点：
+- 设置优先级的时候，要有对应的目标。比如*H:[labelB1(200@740)]*它就是对宽度为200的约束设置优先级。如果你写成*H:[labelB1(@740)]*系统则不知道你要对什么约束进行优先级设置。
+- 优先级分为如下几个层次：
+  - LOW(250),
+  - HIGH(750),
+  - REQUIRED(1000)
+  要注意的是，如果你对一个约束不设置优先级的话，系统会默认给它1000的优先级。如果你要在运行中改变约束的优先级，它原来的优先级不能是1000，你也不能把一个之前的优先级不是1000的改为1000。
+
+实际工作场景中，我们需要在代码里单独对某一个控件添加控制约束。比如：
+```objective-c
+// 添加隐藏的约束
+self.constraintHideA = [viewAWrapper q_addHideConstraintVertically];
+
+/*framework中的源代码：
+-(NSLayoutConstraint*)q_addHideConstraintVertically{
+    UIView* selfView = self;
+    self.clipsToBounds = YES;
+    return [self q_addConstraintsByText:@"V:[selfView(0@250)];" involvedViews:NSDictionaryOfVariableBindings(selfView)][0];
+}
+*/
+
+// 控制
+if(self.constraintHideA.priority >= UILayoutPriorityDefaultHigh){
+            self.constraintHideA.priority = UILayoutPriorityDefaultLow;
+        }else{
+            self.constraintHideA.priority = UILayoutPriorityDefaultHigh + 1;
+        }
+}
+```
