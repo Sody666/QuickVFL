@@ -32,6 +32,7 @@
 		98E524321E2D044D00403198 /* QTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 98E5241F1E2D044D00403198 /* QTableViewCell.m */; };
 		98E524331E2D044D00403198 /* QTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98E524211E2D044D00403198 /* QTableViewController.m */; };
 		98E524361E2D048000403198 /* QuickVFL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98E524351E2D048000403198 /* QuickVFL.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		98E5243B1E2DACE700403198 /* QPriorityDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 98E5243A1E2DACE700403198 /* QPriorityDemoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,8 @@
 		98E524351E2D048000403198 /* QuickVFL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QuickVFL.framework; sourceTree = "<group>"; };
 		98E524371E2D057300403198 /* QRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRootViewController.h; sourceTree = "<group>"; };
 		98E524381E2D05E300403198 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		98E524391E2DACE700403198 /* QPriorityDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QPriorityDemoViewController.h; sourceTree = "<group>"; };
+		98E5243A1E2DACE700403198 /* QPriorityDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QPriorityDemoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +169,8 @@
 				98E524191E2D044D00403198 /* QVisibilityViewController.h */,
 				98E5241A1E2D044D00403198 /* QVisibilityViewController.m */,
 				98E5241B1E2D044D00403198 /* tableView */,
+				98E524391E2DACE700403198 /* QPriorityDemoViewController.h */,
+				98E5243A1E2DACE700403198 /* QPriorityDemoViewController.m */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -246,6 +251,7 @@
 				TargetAttributes = {
 					98E523E31E2D042000403198 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 4TF6TS28RE;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -303,6 +309,7 @@
 				98E5242D1E2D044D00403198 /* QHomeViewController.m in Sources */,
 				98E524261E2D044D00403198 /* QChatView.m in Sources */,
 				98E523E91E2D042000403198 /* main.m in Sources */,
+				98E5243B1E2DACE700403198 /* QPriorityDemoViewController.m in Sources */,
 				98E524291E2D044D00403198 /* UIButton+block.m in Sources */,
 				98E524271E2D044D00403198 /* QChatViewController.m in Sources */,
 				98E524281E2D044D00403198 /* UIAlertView+block.m in Sources */,
@@ -424,6 +431,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4TF6TS28RE;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QuickVFLDemo/frameworks",
@@ -442,6 +450,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 4TF6TS28RE;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/QuickVFLDemo/frameworks",
@@ -475,6 +484,7 @@
 				98E523FD1E2D042100403198 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

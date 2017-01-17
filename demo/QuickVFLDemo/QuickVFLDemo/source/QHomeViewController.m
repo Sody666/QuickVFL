@@ -13,6 +13,7 @@
 #import "QChatViewController.h"
 #import "QVisibilityViewController.h"
 #import "QAnimationViewController.h"
+#import "QPriorityDemoViewController.h"
 #import "UIView+q.h"
 #import "UIButton+block.h"
 
@@ -41,6 +42,7 @@
     [self addItemWithName:@"Chat List" VCClass:[QChatViewController class]];
     [self addItemWithName:@"Visibility Control" VCClass:[QVisibilityViewController class]];
     [self addItemWithName:@"Animation" VCClass:[QAnimationViewController class]];
+    [self addItemWithName:@"Priority Demo" VCClass:[QPriorityDemoViewController class]];
     
     [_viewContentView q_addConstraintsByText:@"V:[_viewAtBottom]-10-|;"
                                involvedViews:NSDictionaryOfVariableBindings(_viewAtBottom)];
